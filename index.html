@@ -163,6 +163,10 @@
 <meta name="supported-color-schemes" content="light">
 <meta name="theme-color" content="#F3F6FA">
 <title>SATH · Pearl Project</title>
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light">
+<meta name="theme-color" content="#F3F6FA">
+<title>SATH · Pearl Project</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -1257,6 +1261,20 @@ html :is(.tone-p,.tone-d) .tlink{backdrop-filter:none}
 :is(.tone-p,.tone-d) .fatt b{color:#fff}
 .dnv::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-bottom:12px;background:#1FA96A;box-shadow:0 0 0 3px rgba(31,169,106,.25)}
 .dn-build .dnv::before{background:#F2A65A;box-shadow:0 0 0 3px rgba(242,166,90,.25)}
+/* design vs built */
+.pvpair{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin-bottom:28px}
+.pvpair figure{margin:0;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 18px 40px rgba(11,42,48,.16)}
+.pvpair .art{aspect-ratio:4/3}.pvpair .art img{width:100%;height:100%;object-fit:cover}
+.pvpair figcaption{position:absolute;left:14px;top:14px}
+.pvt{display:inline-block;padding:8px 14px;border-radius:30px;font:700 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.pvt-d{background:#0C8F93}.pvt-r{background:#1FA96A}
+.pvarr{font-size:34px;color:#0C8F93;font-weight:300}
+.gtabs{display:inline-flex;gap:6px;padding:6px;border-radius:14px;background:#fff;box-shadow:0 10px 26px rgba(11,42,48,.12);margin-bottom:22px}
+.gtabs button{all:unset;cursor:pointer;padding:11px 18px;border-radius:10px;font:600 14.5px/1 var(--body);color:#0B2A30;display:inline-flex;gap:8px;align-items:center}
+.gtabs button i{font-style:normal;font-size:12px;padding:3px 7px;border-radius:20px;background:rgba(11,42,48,.08)}
+.gtabs button[aria-selected="true"]{background:linear-gradient(180deg,#27C6BE,#0C8F93);color:#fff;box-shadow:0 8px 18px rgba(12,110,114,.35)}
+.gtabs button[aria-selected="true"] i{background:rgba(255,255,255,.25)}
+@media (max-width:760px){.pvpair{grid-template-columns:1fr}.pvarr{justify-self:center;transform:rotate(90deg)}}
 /* preview palette switcher */
 .palsw{position:fixed;right:14px;bottom:14px;z-index:90;display:flex;gap:6px;align-items:center;padding:8px 10px;background:rgba(20,20,20,.82);backdrop-filter:blur(8px);border-radius:40px;color:#fff;font:500 12px/1 var(--body);box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .palsw button{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:30px;white-space:nowrap}
@@ -1476,6 +1494,10 @@ var UI = {
   test_lbl:{ru:"Тест",uz:"Test",en:"Test",zh:"测试"},
   test_note:{ru:"Это тестовая публикация — пример того, как будут выглядеть новости. Скоро здесь появятся настоящие материалы.",uz:"Bu test nashri — yangiliklar qanday ko‘rinishiga misol. Tez orada bu yerda haqiqiy materiallar paydo bo‘ladi.",en:"This is a test post — an example of how news will look. Real stories will appear here soon.",zh:"这是一篇测试文章，用于展示新闻的呈现方式。真实内容即将上线。"},
   prj_web:{ru:"Сайт проекта",uz:"Loyiha sayti",en:"Project website",zh:"项目网站"},
+  tab_design:{ru:"Проект",uz:"Loyiha",en:"Design",zh:"设计"},
+  tab_real:{ru:"Реализовано",uz:"Amalga oshirildi",en:"Built",zh:"建成"},
+  pr_vs:{ru:"Проект и реализация",uz:"Loyiha va amalga oshirish",en:"Design and reality",zh:"设计与实景"},
+  pr_vs_h:{ru:"Как было на проекте — и как построено",uz:"Loyihada qanday edi — va qanday qurildi",en:"As designed — and as built",zh:"设计效果与建成实景"},
   phases:{ru:"Этапы",uz:"Bosqichlar",en:"Phases",zh:"分期"},
   done_lbl:{ru:"Сданные и строящиеся объекты",uz:"Topshirilgan va qurilayotgan obyektlar",en:"Delivered and under construction",zh:"已交付与在建项目"},
   build_stamp:{ru:"СТРОИТСЯ · SATH · СТРОИТСЯ · ",uz:"QURILMOQDA · SATH · QURILMOQDA · ",en:"UNDER CONSTRUCTION · SATH · ",zh:"在建中 · SATH · 在建中 · "},
@@ -1662,11 +1684,11 @@ var P = [
   sub:{ru:"Жилой массив: 1 и 2 этапы сданы, 3–4 реализуются",uz:"Turar-joy massivi: 1 va 2-bosqichlar topshirildi, 3–4 amalga oshirilmoqda",en:"Residential district: phases 1–2 delivered, 3–4 under construction",zh:"住宅区：一、二期已交付，三、四期实施中"},
   loc:{ru:"Ташкент",uz:"Toshkent",en:"Tashkent",zh:"塔什干"},
   d:{ru:"Жилой массив, который строится по этапам. Первый и второй этапы уже построены и сданы, третий и четвёртый сейчас реализуются.",uz:"Bosqichma-bosqich qurilayotgan turar-joy massivi. Birinchi va ikkinchi bosqichlar qurib topshirildi, uchinchi va to‘rtinchi bosqichlar amalga oshirilmoqda.",en:"A residential district built in phases. Phases one and two are complete and handed over; phases three and four are under construction.",zh:"分期建设的住宅区。一期和二期已建成并交付，三期和四期正在实施。"}},
- {s:"mosque",type:"public",img:"ph-mosque",status:"done",gal:["ph-mosque"],svc:["architecture"],
+ {s:"mosque",type:"public",img:"mq01",status:"done",gal:["mq01","mq02","mq03","mq04","mq05","mq06","mq07","mq08","mq09"],real:[],svc:["architecture"],
   t:{ru:"Мечеть",uz:"Masjid",en:"Mosque",zh:"清真寺"},
-  sub:{ru:"Проект и построенное здание",uz:"Loyiha va qurilgan bino",en:"Design and the completed building",zh:"设计与建成的建筑"},
+  sub:{ru:"Соборная мечеть с куполом и минаретом",uz:"Gumbazli va minorali jome masjidi",en:"Congregational mosque with a dome and minaret",zh:"带穹顶与宣礼塔的聚礼清真寺"},
   loc:{ru:"Узбекистан",uz:"O‘zbekiston",en:"Uzbekistan",zh:"乌兹别克斯坦"},
-  d:{ru:"Мечеть по проекту бюро: здание построено и сдано. На странице — проектные изображения и фотографии готового здания.",uz:"Byuro loyihasi bo‘yicha masjid: bino qurib topshirilgan. Sahifada loyiha tasvirlari va tayyor bino suratlari.",en:"A mosque designed by the studio: the building is complete and handed over. The page shows the design images and photos of the finished building.",zh:"由本事务所设计的清真寺：建筑已建成并交付。页面展示设计图与建成照片。"}},
+  d:{ru:"Мечеть с большим ребристым куполом на барабане с окнами, двумя малыми куполами и высоким минаретом. Белые фасады с порталами-пештаками, стрельчатыми витражами, синими изразцовыми вставками и каллиграфическим фризом. Перед входом — площадь со ступенями, фонарями и озеленением; рядом — служебный корпус с наружной лестницей.",uz:"Derazali baraban ustidagi katta qovurg‘ali gumbaz, ikkita kichik gumbaz va baland minorali masjid. Peshtoqli oq fasadlar, ravoqli vitrajlar, ko‘k koshin qo‘shimchalari va xattotlik frizi. Kirish oldida zinapoyalar, chiroqlar va ko‘kalamzorli maydon; yonida tashqi zinali xizmat binosi.",en:"A mosque with a large ribbed dome on a windowed drum, two smaller domes and a tall minaret. White façades with pishtaq portals, pointed stained-glass windows, blue tile inserts and a calligraphic frieze. A stepped forecourt with lanterns and planting in front; a service block with an external stair alongside.",zh:"清真寺拥有带窗鼓座上的大型肋状穹顶、两座小穹顶和一座高耸的宣礼塔。白色立面配以拱门门廊、尖拱彩窗、蓝色瓷砖镶嵌和书法饰带。入口前是设有台阶、路灯和绿化的广场；旁边是带室外楼梯的辅助楼。"}},
  {s:"nuroniylar-maskani",type:"public",img:"nur01",status:"done",gal:["nur01","nur02","nur03","nur04","nur05","nur06"],svc:["architecture","general-design"],
   t:{ru:"Нуронийлар маскани",uz:"Nuroniylar maskani",en:"Nuroniylar Maskani",zh:"长者之家"},
   sub:{ru:"Гузар махалли — центр для старшего поколения",uz:"Mahalla guzari — keksa avlod uchun markaz",en:"Mahalla guzar — a centre for senior citizens",zh:"社区中心——长者之家"},
@@ -2278,7 +2300,12 @@ function vProject(p){
    (p.phases&&p.phases.length?'<section class="wrap" style="padding-top:clamp(32px,4vw,56px)"><div class="chapter"><h3>'+u("phases")+'</h3>'+phChips(p)+'</div></section>':'')+
    ([["ch_task",p.task],["ch_concept",p.concept],["ch_solutions",p.sol]].filter(function(c){return T(c[1]).trim();}).length?'<section class="sec wrap">'+[["ch_task",p.task],["ch_concept",p.concept],["ch_solutions",p.sol]].filter(function(c){return T(c[1]).trim();}).map(function(c){return '<div class="chapter"><h3>'+u(c[0])+'</h3><p class="prose">'+T(c[1])+'</p></div>';}).join("")+'</section>':'<div style="height:clamp(40px,5vw,72px)"></div>')+
    (function(){var pv=VIDEOS.filter(function(v){return v.prj===p.s;});return pv.length?'<section class="wrap" style="padding-bottom:clamp(48px,6vw,80px)"><div class="sechead"><div><span class="lbl">'+u("nav_video")+' · '+pv.length+'</span><h2>'+u("nav_video")+'</h2></div></div>'+vgrid(pv)+'</section>':'';})()+
-   '<section class="wrap" style="padding-bottom:clamp(64px,8vw,112px)"><div class="sechead"><div><span class="lbl">'+u("gallery")+' · '+p.gal.length+'</span><h2>'+u("gallery")+'</h2></div></div><div class="gallery">'+gal+'</div></section>'+
+   (function(){var re=p.real||[];var gr=re.map(function(k,v){return '<button type="button" data-lb="r'+v+'" aria-label="'+u("photo")+' '+(v+1)+'"><div class="art">'+IMG(k,T(p.t)+" — "+(v+1),"(max-width:700px) 100vw, 66vw")+'</div></button>';}).join("");
+     if(!re.length)return '<section class="wrap" style="padding-bottom:clamp(64px,8vw,112px)"><div class="sechead"><div><span class="lbl">'+u("gallery")+' · '+p.gal.length+'</span><h2>'+u("gallery")+'</h2></div></div><div class="gallery">'+gal+'</div></section>';
+     return '<section class="wrap pvr" style="padding-bottom:clamp(64px,8vw,112px)"><div class="sechead"><div><span class="lbl">'+u("pr_vs")+'</span><h2>'+u("pr_vs_h")+'</h2></div></div>'+
+      '<div class="pvpair"><figure><div class="art">'+IMG(p.gal[0],u("tab_design"),"(max-width:760px) 100vw, 50vw")+'</div><figcaption><b class="pvt pvt-d">'+u("tab_design")+'</b></figcaption></figure><span class="pvarr" aria-hidden="true">→</span><figure><div class="art">'+IMG(re[0],u("tab_real"),"(max-width:760px) 100vw, 50vw")+'</div><figcaption><b class="pvt pvt-r">'+u("tab_real")+'</b></figcaption></figure></div>'+
+      '<div class="gtabs" role="tablist"><button type="button" role="tab" data-act="gtab" data-g="d" aria-selected="true">'+u("tab_design")+' <i>'+p.gal.length+'</i></button><button type="button" role="tab" data-act="gtab" data-g="r" aria-selected="false">'+u("tab_real")+' <i>'+re.length+'</i></button></div>'+
+      '<div class="gallery" data-gp="d">'+gal+'</div><div class="gallery" data-gp="r" hidden>'+gr+'</div></section>';})()+
    (p.plan?'<section class="wrap" style="padding-bottom:clamp(64px,8vw,112px)"><div class="sechead"><div><span class="lbl">'+u("plans")+'</span><h2>'+(p.planT?T(p.planT):u("plan_2"))+'</h2></div></div><figure class="planfig"><div class="art">'+IMG(p.plan,p.planT?T(p.planT):u("plan_2"),"100vw")+'</div></figure></section>':'')+
    '<section class="wrap" style="padding-bottom:clamp(64px,8vw,112px)"><div class="chapter"><h3>'+u("services_done")+'</h3><div class="tags">'+p.svc.map(function(s){var x=svcBy(s);return '<a href="#service-'+s+'">'+T(x.t)+'</a>';}).join("")+'</div></div>'+
    '</section>'+
@@ -2550,11 +2577,12 @@ document.addEventListener("click",function(e){
   if(t.dataset.track) track(t.dataset.track);
   if(t.dataset.lang){L=t.dataset.lang;try{localStorage.setItem("sath_lang",L);}catch(x){}render(true);return;}
   if(t.dataset.dep!==undefined&&t.hasAttribute("data-dep")){vacDep=t.dataset.dep;app.querySelectorAll("[data-dep]").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.dep===vacDep));});document.getElementById("vac-wrap").innerHTML=vacList();return;}
-  if(t.hasAttribute("data-lb")){openLb(+t.dataset.lb);return;}
+  if(t.hasAttribute("data-lb")){var lv=t.dataset.lb;openLb(lv.charAt(0)==="r"?+lv.slice(1):+lv,lv.charAt(0)==="r");return;}
   var a=t.dataset.act;
   if(a==="menu"){menuOpen=true;document.body.style.overflow="hidden";app.insertAdjacentHTML("beforeend",menuHtml());var c=app.querySelector(".menu [data-act=menu-close]");if(c)c.focus();}
   else if(a==="menu-close"){closeMenu();}
   else if(a==="hide-notice"){noticeHidden=true;try{localStorage.setItem("sath_notice","1");}catch(x){}var n=app.querySelector(".notice");if(n)n.remove();}
+  else if(a==="gtab"){var sec=t.closest(".pvr");var g=t.dataset.g;sec.querySelectorAll(".gtabs button").forEach(function(b){b.setAttribute("aria-selected",String(b===t));});sec.querySelectorAll("[data-gp]").forEach(function(x){x.hidden=x.dataset.gp!==g;});}
   else if(a==="reset-flt"){flt={type:"",svc:"",status:"",year:"",q:""};render(true);}
   else if(a==="form-reset"){formDraft[t.dataset.kind]={};render(true);}
   else if(a==="copy"){var txt=t.dataset.text,orig=t.textContent;
@@ -2613,11 +2641,11 @@ document.addEventListener("submit",function(e){
 
 /* lightbox */
 function curProject(){var m=routeName.match(/^project-(.+)$/);return m?prjBy(m[1]):null;}
-function openLb(i){var p=curProject();if(!p)return;lbState={i:i,p:p};drawLb();document.body.style.overflow="hidden";}
-function drawLb(){var old=document.querySelector(".lb");if(old)old.remove();var s=lbState,n=s.p.gal.length,k=s.p.gal[s.i];
+function openLb(i,rl){var p=curProject();if(!p)return;lbState={i:i,p:p,L:rl?(p.real||[]):p.gal};drawLb();document.body.style.overflow="hidden";}
+function drawLb(){var old=document.querySelector(".lb");if(old)old.remove();var s=lbState,n=s.L.length,k=s.L[s.i];
   document.body.insertAdjacentHTML("beforeend",'<div class="lb" role="dialog" aria-modal="true" aria-label="'+u("gallery")+'"><div class="lbtop"><span>'+T(s.p.t)+' · '+(s.i+1)+' '+u("of")+' '+n+'</span><button type="button" data-act="lb-close" aria-label="'+u("close")+'">'+u("close")+' ✕</button></div><div class="stage"><img src="img/'+k+'-1800.jpg" alt="'+esc(T(s.p.t))+'"></div><div class="nav2"><button type="button" data-act="lb-prev">← '+u("prev")+'</button><button type="button" data-act="lb-next">'+u("next")+' →</button></div></div>');
   var c=document.querySelector(".lb [data-act=lb-close]");if(c)c.focus();}
-function stepLb(d){var n=lbState.p.gal.length;lbState.i=(lbState.i+d+n)%n;drawLb();}
+function stepLb(d){var n=lbState.L.length;lbState.i=(lbState.i+d+n)%n;drawLb();}
 function closeLb(){lbState=null;var el=document.querySelector(".lb");if(el)el.remove();document.body.style.overflow="";}
 
 window.SATH_EXPORT=function(){return {SITE:SITE,P:P,ARTICLES:ARTICLES,TEAM:TEAM,CERTS:CERTS,VAC:VAC,VIDEOS:VIDEOS};};

@@ -1142,6 +1142,10 @@ html :is(.tone-p,.tone-d) .tlink{backdrop-filter:none}
 /* instagram video */
 .vlb .vbox.ig{width:min(100%,480px);aspect-ratio:auto;height:min(calc(100vh - 140px),860px);background:#fff;border-radius:12px;overflow:hidden}
 .vlb .vbox.ig iframe{background:#fff}
+.vlb .igfb{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 16px;padding:10px 8px 0;text-align:center;font-size:14px;color:rgba(255,255,255,.8)}
+.vlb .igfb .btn{padding:12px 20px!important;font-size:14.5px;text-decoration:none}
+.vlb .vbox.ig{height:min(calc(100vh - 210px),860px)}
+@media (max-width:760px){.vlb .vbox.ig{height:calc(100svh - 230px)}.vlb .igfb span{flex-basis:100%}}
 /* === performance v2 === */
 .stg i::after{animation:none}
 .stgpg i::after,.dni .stg i::after,.yzc .stg i::after{animation:stgp2 1.8s ease-out infinite}
@@ -1200,6 +1204,8 @@ var UI = {
   video_intro:{ru:"Видеопрезентации и анимации наших проектов: облёты, интерьеры и BIM-модели.",uz:"Loyihalarimizning video taqdimotlari va animatsiyalari: aylanib uchish, interyerlar va BIM-modellar.",en:"Video presentations and animations of our projects: fly-throughs, interiors and BIM models.",zh:"我们项目的视频演示与动画：漫游、室内与 BIM 模型。"},
   all_video:{ru:"Все видео",uz:"Barcha videolar",en:"All videos",zh:"全部视频"},
   play:{ru:"Смотреть",uz:"Ko‘rish",en:"Watch",zh:"观看"},
+  ig_watch:{ru:"Смотреть в Instagram",uz:"Instagram’da ko‘rish",en:"Watch on Instagram",zh:"在 Instagram 上观看"},
+  ig_note:{ru:"Если видео не запускается здесь — откройте его в Instagram:",uz:"Agar video bu yerda ochilmasa — uni Instagram’da oching:",en:"If the video doesn’t play here, open it on Instagram:",zh:"如果视频无法在此播放，请在 Instagram 中打开："},
   project_open:{ru:"Смотреть проект",uz:"Loyihani ko‘rish",en:"View project",zh:"查看项目"},
   messengers:{ru:"Мессенджеры и соцсети",uz:"Messenjerlar va ijtimoiy tarmoqlar",en:"Messengers and social media",zh:"即时通讯与社交媒体"},
   cta:{ru:"Обсудить проект",uz:"Loyihani muhokama qilish",en:"Discuss a project",zh:"洽谈项目"},
@@ -2179,7 +2185,7 @@ function openVideo(i){
   var ig=v.type==="instagram";
   var player=ig?'<iframe src="https://www.instagram.com/reel/'+encodeURIComponent(v.src)+'/embed/" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen scrolling="no" title="'+esc(T(v.t))+'"></iframe>':v.type==="youtube"?'<iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(v.src)+'?autoplay=1&rel=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="'+esc(T(v.t))+'"></iframe>'
     :'<video src="'+esc(v.src)+'" controls autoplay playsinline preload="metadata"'+(v.poster?' poster="img/'+esc(v.poster)+'-1800.jpg"':'')+'></video>';
-  document.body.insertAdjacentHTML("beforeend",'<div class="lb vlb" role="dialog" aria-modal="true" aria-label="'+esc(T(v.t))+'"><div class="lbtop"><span>'+T(v.t)+'</span><button type="button" data-act="cert-close">'+u("close")+' ✕</button></div><div class="stage"><div class="vbox'+(ig?' ig':'')+'">'+player+'</div></div><div class="nav2"></div></div>');
+  document.body.insertAdjacentHTML("beforeend",'<div class="lb vlb" role="dialog" aria-modal="true" aria-label="'+esc(T(v.t))+'"><div class="lbtop"><span>'+T(v.t)+'</span><button type="button" data-act="cert-close">'+u("close")+' ✕</button></div><div class="stage"><div class="vbox'+(ig?' ig':'')+'">'+player+'</div></div><div class="nav2">'+(ig?'<div class="igfb"><span>'+u("ig_note")+'</span><a class="btn igbtn" href="https://www.instagram.com/reel/'+encodeURIComponent(v.src)+'/" target="_blank" rel="noopener">'+u("ig_watch")+' ↗</a></div>':'')+'</div></div>');
   document.body.style.overflow="hidden";track("video_play",{i:i});
 }
 function vProjects(){

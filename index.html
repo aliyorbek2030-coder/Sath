@@ -187,6 +187,10 @@
 <meta name="supported-color-schemes" content="light">
 <meta name="theme-color" content="#F3F6FA">
 <title>SATH · Pearl Project</title>
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light">
+<meta name="theme-color" content="#F3F6FA">
+<title>SATH · Pearl Project</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -1948,7 +1952,7 @@ function logoMark(cls){uidL=(typeof uidL==="number"?uidL:0)+1;var g="lg"+uidL;re
 function logo(){uidL=(typeof uidL==="number"?uidL:0)+1;var g="lg"+uidL;return '<a class="logo" href="#home" aria-label="SATH — Pearl Project LLC"><svg class="mk" viewBox="0 0 30 64" fill="none" aria-hidden="true"><defs><linearGradient id="'+g+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E8C98A"/></linearGradient></defs><path d="M15 1 L25 31 H15Z" fill="url(#'+g+')" stroke="currentColor" stroke-width=".7" stroke-opacity=".5"/><path d="M15 1 L5 31 H15Z" fill="currentColor" opacity=".6"/><path d="M1 31.5 H29" stroke="currentColor" stroke-width="1.6"/><path d="M5 32.5 L15 62 L25 32.5" stroke="#D9B46A" stroke-width="1.4"/><path d="M15 32.5 V62" stroke="#D9B46A" stroke-width=".9"/><g stroke="#D9B46A" stroke-width="1" opacity=".85"><path d="M7 38 H23"/><path d="M9 44 H21" stroke-dasharray="3 2"/><path d="M11 50 H19"/><path d="M13 56 H17" stroke-dasharray="2 1.5"/></g></svg><span class="wm">SATH<small>PEARL PROJECT</small></span></a>';}
 var uidL=0;
 function langs(){return '<div class="langs" role="group" aria-label="Language">'+["ru","uz","en","zh"].map(function(l){return '<button type="button" data-lang="'+l+'" aria-pressed="'+(l===L)+'"'+(l==="zh"?' lang="zh"':'')+'>'+(l==="zh"?"中文":l.toUpperCase())+'</button>';}).join("")+'</div>';}
-var VIDEOS=[{t:{ru:"Открытие соборной мечети «Оккургон»",uz:"«Oqqo‘rg‘on» jome masjidining ochilishi",en:"Opening of the Oqqurgon Mosque",zh:"奥库尔贡聚礼清真寺启用"},type:"instagram",src:"Dd6ackngFg8",prj:"mosque",poster:"mqr01"},{t:{ru:"Нуронийлар маскани — открытие",uz:"Nuroniylar maskani — ochilish",en:"Nuroniylar Maskani — opening",zh:"长者之家——启用"},type:"youtube",src:"gUTl33XkNQA",prj:"nuroniylar-maskani"}];
+var VIDEOS=[{t:{ru:"Открытие соборной мечети «Оккургон»",uz:"«Oqqo‘rg‘on» jome masjidining ochilishi",en:"Opening of the Oqqurgon Mosque",zh:"奥库尔贡聚礼清真寺启用"},type:"instagram",src:"Dd8EIE9tliA",prj:"mosque",poster:"mqr01"},{t:{ru:"Нуронийлар маскани — открытие",uz:"Nuroniylar maskani — ochilish",en:"Nuroniylar Maskani — opening",zh:"长者之家——启用"},type:"youtube",src:"gUTl33XkNQA",prj:"nuroniylar-maskani"}];
 function navItems(){return VIDEOS.length?NAV.slice(0,1).concat([["video","nav_video"]],NAV.slice(1)):NAV;}
 var NAV=[["projects","nav_projects"],["services","nav_services"],["about","nav_about"],["journal","nav_journal"],["career","nav_career"],["contacts","nav_contacts"]];
 function header(){

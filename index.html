@@ -70,6 +70,15 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;backgroun
 .langs button{background:none;border:0;color:var(--muted);padding:6px 6px;cursor:pointer;font:inherit;letter-spacing:.06em}
 .langs button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
 .burger{display:none;background:none;border:0;width:44px;height:44px;margin-left:auto;cursor:pointer;color:var(--ink)}
+.hback{flex:none;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 16px 0 11px;margin-right:-10px;border-radius:40px;border:1px solid color-mix(in srgb,var(--ink) 22%,transparent);background:color-mix(in srgb,var(--ground) 75%,transparent);color:var(--ink);font:600 13px/1 var(--body);letter-spacing:.02em;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.hback:hover{border-color:var(--ink);background:var(--ground)}.hback:active{transform:scale(.94)}
+.top.dark .hback{color:#EAF2FA;border-color:rgba(255,255,255,.4);background:transparent}
+@media (max-width:1599px){.hback{width:40px;padding:0;justify-content:center}.hback span{display:none}}
+@media (max-width:760px){.hback{margin-right:-16px}}
+/* header fits on one line at every desktop width */
+.bar{gap:clamp(14px,1.7vw,28px)}.nav{gap:clamp(14px,1.5vw,26px)}.nav a,.bar>.btn,.langs button{white-space:nowrap}
+header.top.tight .nav,header.top.tight .bar>.langs,header.top.tight .bar>.btn{display:none}header.top.tight .burger{display:block}
+.bar>.logo,.bar>.logo .mk,.bar>.hback{flex:none}
 .bar .btn{padding:12px 18px;font-size:14px}
 @media (max-width:1080px){.nav,.bar>.langs,.bar>.btn{display:none}.burger{display:block}}
 .menu{position:fixed;inset:0;z-index:60;background:var(--ground);display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 12px) clamp(16px,4vw,48px) calc(env(safe-area-inset-bottom,0px) + 24px);overflow:auto}
@@ -1202,6 +1211,7 @@ var UI = {
   call:{ru:"Позвонить",uz:"Qo‘ng‘iroq",en:"Call",zh:"致电"},
   write:{ru:"Написать",uz:"Yozish",en:"Message",zh:"留言"},
   menu:{ru:"Меню",uz:"Menyu",en:"Menu",zh:"菜单"},
+  back:{ru:"Назад",uz:"Orqaga",en:"Back",zh:"返回"},
   close:{ru:"Закрыть",uz:"Yopish",en:"Close",zh:"关闭"},
   home:{ru:"Главная",uz:"Bosh sahifa",en:"Home",zh:"首页"},
   demo:{ru:"демо",uz:"demo",en:"demo",zh:"示例"},
@@ -1824,7 +1834,7 @@ var NAV=[["projects","nav_projects"],["services","nav_services"],["about","nav_a
 function header(){
   var sec=routeName.split("-")[0];var map={project:"projects",service:"services",article:"journal",vacancy:"career",team:"about"};sec=map[sec]||sec;
   return (noticeHidden?'':'<div class="notice"><div class="wrap"><span>'+u("demo_notice")+'</span><button type="button" data-act="hide-notice">'+u("hide")+'</button></div></div>')+
-  '<header class="top'+(routeName==="home"?' onhx'+((SITE.heroStyle||"letters")==="photo"?' dk':''):'')+'"><div class="wrap bar">'+logo()+
+  '<header class="top'+(routeName==="home"?' onhx'+((SITE.heroStyle||"letters")==="photo"?' dk':''):'')+'"><div class="wrap bar">'+(routeName!=="home"?'<button class="hback" type="button" data-act="back" aria-label="'+u("back")+'"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>'+u("back")+'</span></button>':'')+logo()+
   '<nav class="nav" aria-label="Main">'+navItems().map(function(n){return '<a href="#'+n[0]+'"'+(sec===n[0]?' aria-current="page"':'')+'>'+u(n[1])+'</a>';}).join("")+'</nav>'+
   langs()+'<a class="btn" href="#contacts-form" data-track="cta_click">'+u("cta")+'</a>'+
   '<button class="burger" type="button" data-act="menu" aria-label="'+u("menu")+'" aria-expanded="false"><svg viewBox="0 0 24 24" width="26" height="26" fill="none"><path d="M3 8h18M3 16h18" stroke="currentColor" stroke-width="1.6"/></svg></button>'+
@@ -2364,24 +2374,37 @@ function applyPal(){var v=palName(),de=document.documentElement;if(v==="classic"
   sw.innerHTML=o.map(function(x){return '<button data-p="'+x[0]+'" aria-pressed="'+(x[0]===v)+'" title="'+x[1]+'" aria-label="'+x[1]+'"><i style="background:'+x[2]+'"></i><span>'+x[1]+'</span></button>';}).join("");
 }
 var PAL_OVR=null;
-function render(keepScroll){
+function render(keepScroll,restoreY){
   var h=(location.hash||"").replace(/^#/,"");
   if(h==="service-cta-go"||h==="vacancy-apply"){var tgt=document.getElementById(h==="service-cta-go"?"service-cta":"vacancy-apply");if(tgt){tgt.scrollIntoView({behavior:"smooth"});return;}}
   var r=resolve();if(!r) return;
   var prevRoute=routeName;routeName=r.n;if(r.n!==prevRoute)sendView(r.n);
-  document.documentElement.classList.toggle("snap-on",r.n==="home"&&!SC.rm);
+  document.documentElement.classList.remove("snap-on");
   document.documentElement.lang=L==="uz"?"uz":L;
   applyPal();
   document.title="SATH · Pearl Project — "+(r.title||"");
   var y=window.scrollY;
   app.innerHTML=header()+'<main id="main">'+r.v+'</main>'+footer()+(menuOpen?menuHtml():"");
-  if(r.anchor){var el=document.getElementById(r.anchor);if(el) setTimeout(function(){el.scrollIntoView();},0);}
+  if(restoreY!=null) window.scrollTo(0,restoreY);
+  else if(r.anchor){var el=document.getElementById(r.anchor);if(el) setTimeout(function(){el.scrollIntoView();},0);}
   else if(keepScroll) window.scrollTo(0,y); else window.scrollTo(0,0);
-  observe();
+  observe();hdrFit();
   SC.vh=0;SC.kids=null;sheetsWatch();sheetsLayout();setTimeout(sheetsLayout,700);
   var forms=app.querySelectorAll("form.lead");if(forms.length) track("form_view",{count:forms.length});
 }
-window.addEventListener("hashchange",function(){menuOpen=false;document.body.style.overflow="";render(false);});
+function hdrFit(){var h=app.querySelector("header.top"),bar=h&&h.querySelector(".bar");if(!bar)return;h.classList.remove("tight");if(window.innerWidth>1080&&bar.scrollWidth>bar.clientWidth+1)h.classList.add("tight");}
+var hfR=0;window.addEventListener("resize",function(){if(hfR)return;hfR=requestAnimationFrame(function(){hfR=0;hdrFit();});});
+/* ---------- back navigation: every history entry remembers its scroll position ---------- */
+var HNAV={n:0,cur:null,y:{}};
+try{if("scrollRestoration" in history)history.scrollRestoration="manual";}catch(e){}
+function navEntry(){var s=history.state,y=null;
+  if(s&&s.sid){if(Object.prototype.hasOwnProperty.call(HNAV.y,s.sid))y=HNAV.y[s.sid];HNAV.cur=s;}
+  else{var st={sid:"e"+(++HNAV.n)+"-"+(Date.now()%1e7),d:HNAV.cur?HNAV.cur.d+1:0};try{history.replaceState(st,"");}catch(e){}HNAV.cur=st;}
+  return y;}
+function goBack(){var s=history.state;if(s&&s.sid&&s.d>0){history.back();return;}
+  var par={project:"projects",service:"services",article:"journal",vacancy:"career",team:"about"}[routeName.split("-")[0]];
+  location.hash=(par&&par!==routeName)?par:"home";}
+window.addEventListener("hashchange",function(){if(HNAV.cur)HNAV.y[HNAV.cur.sid]=window.scrollY;var y=navEntry();menuOpen=false;document.body.style.overflow="";var lb=document.querySelector(".lb");if(lb){lb.remove();lbState=null;}render(false,y);});
 
 /* reveal on scroll: visible at rest, subtle lift only */
 var io=null;
@@ -2462,6 +2485,7 @@ function sheetsLayout(){if(SC.lay)return;SC.lay=requestAnimationFrame(function()
   yzPrep();
   for(var k=0;k<shs.length;k++){var t=Math.min(0,vh-hs[k])+"px";if(shs[k].style.top!==t)shs[k].style.top=t;}
   snapLayout(vh);
+  if(routeName==="home"&&!SC.rm)document.documentElement.classList.add("snap-on");
   sheetsTick();});}
 function sheetsTick(){
   shRAF=0;
@@ -2521,6 +2545,7 @@ document.addEventListener("click",function(e){
   var a=t.dataset.act;
   if(a==="menu"){menuOpen=true;document.body.style.overflow="hidden";var psw=document.querySelector(".palsw");if(psw)psw.style.display="none";app.insertAdjacentHTML("beforeend",menuHtml());var c=app.querySelector(".menu [data-act=menu-close]");if(c)c.focus();}
   else if(a==="menu-close"){closeMenu();}
+  else if(a==="back"){goBack();}
   else if(a==="hide-notice"){noticeHidden=true;try{localStorage.setItem("sath_notice","1");}catch(x){}var n=app.querySelector(".notice");if(n)n.remove();}
   else if(a==="gtab"){var sec=t.closest(".pvr");var g=t.dataset.g;sec.querySelectorAll(".gtabs button").forEach(function(b){b.setAttribute("aria-selected",String(b===t));});sec.querySelectorAll("[data-gp]").forEach(function(x){x.hidden=x.dataset.gp!==g;});}
   else if(a==="reset-flt"){flt={type:"",svc:"",status:"",year:"",q:""};render(true);}
@@ -2601,7 +2626,7 @@ function applyContent(d){
   if((a=vis(d.VAC)))VAC=a;
   if((a=vis(d.VIDEOS)))VIDEOS=a.filter(function(v){return v.src;});
 }
-var boot=false;function go(){if(boot)return;boot=true;render(false);}
+var boot=false;function go(){if(boot)return;boot=true;navEntry();render(false);}
 try{
   var ctl=typeof AbortController!=="undefined"?new AbortController():null;
   setTimeout(function(){if(ctl)ctl.abort();go();},4000);

@@ -195,6 +195,10 @@
 <meta name="supported-color-schemes" content="light">
 <meta name="theme-color" content="#F3F6FA">
 <title>SATH · Pearl Project</title>
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light">
+<meta name="theme-color" content="#F3F6FA">
+<title>SATH · Pearl Project</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -1323,6 +1327,13 @@ html .hsheets>.sheet,html[data-pal] .hsheets>.sheet{box-shadow:0 -12px 32px rgba
  html .hsheets>.sheet,html[data-pal] .hsheets>.sheet{box-shadow:0 -8px 18px rgba(6,42,48,.14)}
 }
 .yzpr .yzl+.yzl img{will-change:transform}
+/* braking: each sheet / each featured project is a scroll stop */
+.snapl{position:relative;height:0;pointer-events:none}
+.snapl i{position:absolute;left:0;width:1px;scroll-snap-align:start}
+html.snap-on{scroll-snap-type:y proximity}
+html.snap-on footer.site{scroll-snap-align:end}
+@media (hover:none){html.snap-on{scroll-snap-type:y mandatory}html.snap-on .snapl i.st{scroll-snap-stop:always}}
+@media (prefers-reduced-motion:reduce){html.snap-on{scroll-snap-type:none}}
 @media (hover:none){html[data-pal] .yzst .yzbig{text-shadow:none}}
 @media (min-width:761px){.yzab .yzimg img{will-change:transform}}
 .palsw{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(20,20,20,.9)!important}
@@ -1689,8 +1700,8 @@ var P = [
   task:{ru:"Создать цельную среду, где проживание, работа, отдых и сервис объединены в одном пространстве и делают повседневную жизнь проще и удобнее.",uz:"Yashash, ishlash, dam olish va xizmat ko‘rsatish bitta makonda birlashgan, kundalik hayotni osonroq va qulayroq qiladigan yaxlit muhit yaratish.",en:"Create a coherent environment where living, working, leisure and services share one place and make everyday life simpler.",zh:"打造一个协调统一的环境，让居住、工作、休闲和服务集中于一处，使日常生活更加便利。"},
   concept:{ru:"Жилые башни в спокойной геометрии стоят на общем стилобате. На первом уровне — маркет и коммерческие помещения, рядом офисная зона и компактный отель в едином стиле. Верхний уровень отдан жителям: двор и детская площадка, защищённые от городской суеты.",uz:"Sokin geometriyadagi turar-joy minoralari umumiy stilobatda joylashgan. Birinchi sathda — market va tijorat binolari, yonida ofis zonasi va yagona uslubdagi ixcham mehmonxona. Yuqori sath aholiga berilgan: shahar shovqinidan himoyalangan hovli va bolalar maydonchasi.",en:"Residential towers with calm geometry rise from a shared podium. The ground level holds a market and shops, alongside an office zone and a compact hotel in the same style. The upper level belongs to residents, with a courtyard and playground sheltered from the city.",zh:"几何形态沉稳的住宅塔楼坐落在共享裙楼之上。首层为超市和商铺，旁边是办公区和风格统一的精品酒店。上层归住户所有，庭院和儿童游乐场远离城市喧嚣。"},
   sol:{ru:"Жилые здания — 58 895 м², коммерческая зона — 50 163 м², отель — 18 520 м², офисы — 5 550 м², парковка — 26 000 м². Озеленение улицы — 6 612 м², зелёная кровля — 2 150 м². Парковка разгружает двор и делает внутренние маршруты безопасными.",uz:"Turar-joy binolari — 58 895 m², tijorat zonasi — 50 163 m², mehmonxona — 18 520 m², ofislar — 5 550 m², avtoturargoh — 26 000 m². Ko‘cha ko‘kalamzorlashtirish — 6 612 m², yashil tom — 2 150 m². Avtoturargoh hovlini bo‘shatadi va ichki yo‘laklarni xavfsiz qiladi.",en:"Housing 58,895 m², retail 50,163 m², hotel 18,520 m², offices 5,550 m², parking 26,000 m². Street landscaping 6,612 m² and a 2,150 m² green roof. Parking keeps cars out of the courtyard and makes internal routes safe.",zh:"住宅 58,895 m²，商业 50,163 m²，酒店 18,520 m²，办公 5,550 m²，停车 26,000 m²。街道绿化 6,612 m²，绿色屋顶 2,150 m²。停车设施使庭院免受车辆干扰，内部动线安全。"}},
- {s:"service-company",status:"done",pvd:"sc-elev",web:"https://towerup.uz/projects/banking-technology",real:["btr01","btr02","btr03","btr04","btr05","btr06","btr07"],type:"office",img:"sc-main",
-  gal:["sc-main","sc-tower","sc-aerial","sc-anight","sc-both","sc-elev","sc-tnight","sc-pfront","sc-pstreet","sc-pnight","sc-pcorner","sc-pwhite"],
+ {s:"service-company",status:"done",pvd:"sc-elev",web:"https://towerup.uz/projects/banking-technology",real:["btr01","btr02","btr03","btr04","btr05","btr06","btr07"],type:"office",img:"sc-elev",
+  gal:["sc-elev","sc-main","sc-tower","sc-aerial","sc-anight","sc-both","sc-tnight","sc-pfront","sc-pstreet","sc-pnight","sc-pcorner","sc-pwhite"],
   svc:["architecture","bim","visualization"],
   t:{ru:"Btech",uz:"Btech",en:"Btech",zh:"Btech"},
   sub:{ru:"Офисная башня и стеклянный павильон",uz:"Ofis minorasi va shisha pavilon",en:"Office tower and glass pavilion",zh:"办公塔楼与玻璃展馆"},
@@ -2008,7 +2019,9 @@ function footer(){
 }
 
 /* ============ components ============ */
-function IMG(k,alt,sizes,eager){if(/^https?:/.test(k))return '<img src="'+esc(k)+'" alt="'+esc(alt||"")+'"'+(eager?'':' loading="lazy"')+' decoding="async" referrerpolicy="no-referrer">';return '<img src="img/'+k+'-900.jpg" srcset="img/'+k+'-900.jpg 900w, img/'+k+'-1800.jpg 1800w" sizes="'+(sizes||"(max-width:700px) 100vw, 50vw")+'" alt="'+esc(alt||"")+'"'+(eager?'':' loading="lazy"')+' decoding="async">';}
+var IMGPOS={"sc-elev":"80% 58%"};
+function ipos(k){return IMGPOS[k]?' style="object-position:'+IMGPOS[k]+'"':"";}
+function IMG(k,alt,sizes,eager){if(/^https?:/.test(k))return '<img src="'+esc(k)+'" alt="'+esc(alt||"")+'"'+(eager?'':' loading="lazy"')+' decoding="async" referrerpolicy="no-referrer">';return '<img src="img/'+k+'-900.jpg" srcset="img/'+k+'-900.jpg 900w, img/'+k+'-1800.jpg 1800w" sizes="'+(sizes||"(max-width:700px) 100vw, 50vw")+'" alt="'+esc(alt||"")+'"'+ipos(k)+(eager?'':' loading="lazy"')+' decoding="async">';}
 function pcard(p,wide){
   return '<a class="pcard rv'+(wide?' wide':'')+'" href="#project-'+p.s+'">'+
    '<div class="art">'+IMG(p.img,T(p.t),"(max-width:600px) 100vw, 33vw")+stg(p)+'<div class="hov"><span>'+T(p.sub)+'</span><span>→</span></div></div>'+
@@ -2284,7 +2297,7 @@ function vHome(){
   if(VIDEOS.length){tn("p:night");}if(VIDEOS.length)SH.push('<section class="sec wrap" style="padding-top:0"><div class="sechead"><div><span class="lbl">'+u("nav_video")+'</span><h2>'+u("nav_video")+'</h2></div><a class="tlink" href="#video">'+u("all_video")+' '+ARW+'</a></div>'+vgrid(VIDEOS.slice(0,3))+'</section>');
   if(ARTICLES.length){tn("l");}if(ARTICLES.length)SH.push('<section class="sec wrap" style="padding-top:0"><div class="sechead"><div><span class="lbl">'+u("journal_h")+'</span><h2>'+u("journal_h")+'</h2></div><a class="tlink" href="#journal">'+u("all_articles")+' '+ARW+'</a></div><div class="jgrid">'+ARTICLES.slice(0,3).map(jcard).join("")+'</div></section>');
   tn("p:bh05");SH.push(ctaBlock(u("final_h"),u("final_p"),"home"));
-  return '<div class="view hsheets"><div class="sheet s0 tone-l"><div class="shin">'+phHero()+'</div><i class="shdim" aria-hidden="true"></i></div>'+
+  return '<div class="snapl" aria-hidden="true"></div><div class="view hsheets"><div class="sheet s0 tone-l"><div class="shin">'+phHero()+'</div><i class="shdim" aria-hidden="true"></i></div>'+
    '<div class="yzwrap">'+yzStatement()+yzAbout()+yzProjects()+marquee()+'</div>'+
    SH.map(function(x,k){var t=TN[k].split(":");return '<div class="sheet tone-'+t[0]+'" style="--k:'+k+(t[1]?';--bgi:url(img/'+t[1]+'-1800.jpg);--bgs:url(img/'+t[1]+'-900.jpg)':'')+'"><div class="shin">'+x+'</div><i class="shdim" aria-hidden="true"></i></div>';}).join('')+'</div>';
 }
@@ -2527,6 +2540,7 @@ function render(keepScroll){
   if(h==="service-cta-go"||h==="vacancy-apply"){var tgt=document.getElementById(h==="service-cta-go"?"service-cta":"vacancy-apply");if(tgt){tgt.scrollIntoView({behavior:"smooth"});return;}}
   var r=resolve();if(!r) return;
   var prevRoute=routeName;routeName=r.n;if(r.n!==prevRoute)sendView(r.n);
+  document.documentElement.classList.toggle("snap-on",r.n==="home"&&!SC.rm);
   document.documentElement.lang=L==="uz"?"uz":L;
   applyPal();
   document.title="SATH · Pearl Project — "+(r.title||"");
@@ -2563,7 +2577,7 @@ function yzProjects(){
   var list=(SITE.feat||[]).map(prjBy).filter(Boolean);
   P.forEach(function(p){if(list.length<5&&list.indexOf(p)<0)list.push(p);});
   return '<section class="yzs yzpr" style="--n:'+list.length+'"><div class="yzsticky">'+
-   list.map(function(p,i){return '<div class="yzl" style="z-index:'+(i+1)+'"><img src="img/'+p.img+'-1800.jpg" srcset="img/'+p.img+'-900.jpg 900w, img/'+p.img+'-1800.jpg 1800w" sizes="100vw" alt="'+esc(T(p.t))+'" loading="'+(i?'lazy':'eager')+'"></div>';}).join("")+
+   list.map(function(p,i){return '<div class="yzl" style="z-index:'+(i+1)+'"><img src="img/'+p.img+'-1800.jpg" srcset="img/'+p.img+'-900.jpg 900w, img/'+p.img+'-1800.jpg 1800w" sizes="100vw" alt="'+esc(T(p.t))+'"'+ipos(p.img)+' loading="'+(i?'lazy':'eager')+'"></div>';}).join("")+
    '<div class="yzsh" aria-hidden="true"></div><div class="yzcap">'+list.map(function(p,i){return '<div class="yzc'+(i===0?' on':'')+'">'+stg(p,"stgin")+'<span>'+T(p.loc)+' · '+T(TYPES[p.type])+'</span><h2>'+T(p.t)+'</h2><a class="btn hxo" href="#project-'+p.s+'">'+u("project_open")+' '+ARW+'</a></div>';}).join("")+'</div>'+
    '<div class="yzdots">'+list.map(function(p,i){return '<i class="'+(i===0?'on':'')+'"></i>';}).join("")+'</div><span class="yzlbl">'+u("featured")+'</span></div></section>';
 }
@@ -2594,6 +2608,23 @@ function yzTick(vh,secs,rects){
       var act=Math.min(n2-1,Math.round(seg));if(sec._act!==act){sec._act=act;sec._C.forEach(function(c,i){c.classList.toggle("on",i===act);});sec._D.forEach(function(c,i){c.classList.toggle("on",i===act);});}}
   }
 }
+/* ---------- scroll stops ("braking") ---------- */
+function snapLayout(vh){
+  var L=app.querySelector(".snapl"),hs=app.querySelector(".hsheets");if(!L||!hs||SC.rm)return;
+  var sy=window.scrollY,base=L.getBoundingClientRect().top+sy,y=hs.getBoundingClientRect().top+sy,B=[],kids=hs.children,wide=window.innerWidth>760;
+  function add(top,h,st){B.push('<i'+(st?' class="st"':'')+' style="top:'+Math.round(top-base)+'px;height:'+Math.max(1,Math.round(h))+'px"></i>');}
+  for(var k=0;k<kids.length;k++){var el=kids[k],h=el.getBoundingClientRect().height;
+    if(el.classList.contains("yzwrap")){
+      var t0=el.getBoundingClientRect().top+sy;
+      for(var c=0;c<el.children.length;c++){var sec=el.children[c],sr=sec.getBoundingClientRect(),st=sr.top+sy,sh=sr.height,dist=(sec._h||sh)-vh;
+        if(sec.classList.contains("yzpr")&&dist>0){var n=sec.querySelectorAll(".yzl").length;for(var j=0;j<n;j++)add(st+(n>1?dist*j/(n-1):0),1,true);}
+        else if(sec.classList.contains("yzst")){add(st,sh,true);if(dist>0)add(st+dist/1.15,1,true);}
+        else if(sec.classList.contains("yzab")){add(st,sh,true);if(dist>0&&wide)add(st+dist/1.35,1,true);}}
+      y=t0+h;continue;}
+    if(k===0)add(0,y+h,true);else add(y,h,true);
+    y+=h;}
+  var html=B.join("");if(L._h!==html){L._h=html;L.innerHTML=html;}
+}
 /* ---------- home sheets: stacking pages ---------- */
 var shRAF=0;
 function sheetsLayout(){if(SC.lay)return;SC.lay=requestAnimationFrame(function(){SC.lay=0;
@@ -2601,6 +2632,7 @@ function sheetsLayout(){if(SC.lay)return;SC.lay=requestAnimationFrame(function()
   for(var i=0;i<shs.length;i++)hs.push(shs[i].offsetHeight);
   yzPrep();
   for(var k=0;k<shs.length;k++){var t=Math.min(0,vh-hs[k])+"px";if(shs[k].style.top!==t)shs[k].style.top=t;}
+  snapLayout(vh);
   sheetsTick();});}
 function sheetsTick(){
   shRAF=0;

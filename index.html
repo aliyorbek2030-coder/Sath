@@ -175,6 +175,10 @@
 <meta name="supported-color-schemes" content="light">
 <meta name="theme-color" content="#F3F6FA">
 <title>SATH · Pearl Project</title>
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light">
+<meta name="theme-color" content="#F3F6FA">
+<title>SATH · Pearl Project</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -1536,7 +1540,7 @@ var STATUS = {done:"st_done",build:"st_build",work:"st_work",design:"st_design"}
 function stKey(p){return STATUS[p.status]?p.status:"design";}
 function stg(p,cls){var k=stKey(p);return '<span class="stg stg-'+k+(cls?' '+cls:'')+'">'+(k==="done"?'<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.3l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<i aria-hidden="true"></i>')+u(STATUS[k])+'</span>';}
 
-var SITE={phone:"+998 78 555 00 03",email:"",telegram:"",whatsapp:"",instagram:"",feat:["airport-mall","pushkin","blur-glass","samsarak"],hero:"",heroStyle:"letters",palette:"teal"};
+var SITE={phone:"+998 78 555 00 03",email:"",telegram:"https://t.me/pearlprojectsath",whatsapp:"",instagram:"https://www.instagram.com/pearlproject_sath.uz/",feat:["airport-mall","pushkin","blur-glass","samsarak"],hero:"",heroStyle:"letters",palette:"teal"};
 function telHref(){return "tel:"+String(SITE.phone||"").replace(/[^\d+]/g,"");}
 function tgHref(){var t=String(SITE.telegram||"").trim();if(!t)return "";if(/^https?:/.test(t))return t;return "https://t.me/"+t.replace(/^@/,"");}
 function waHref(){var t=String(SITE.whatsapp||"").trim();if(!t)return "";if(/^https?:/.test(t))return t;return "https://wa.me/"+t.replace(/\D/g,"");}

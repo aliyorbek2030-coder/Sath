@@ -1166,6 +1166,11 @@ html.snap-on{scroll-snap-type:y proximity}
 html.snap-on footer.site{scroll-snap-align:end}
 @media (hover:none){html.snap-on{scroll-snap-type:y mandatory}html.snap-on .snapl i.st{scroll-snap-stop:always}}
 @media (prefers-reduced-motion:reduce){html.snap-on{scroll-snap-type:none}}
+/* smooth wheel scrolling: stops are handled softly in JS */
+html.sm{scroll-behavior:auto!important}
+html.sm.snap-on{scroll-snap-type:none}
+/* while a menu / photo viewer / video is open the page behind it stays still */
+html:has(>body[style*="overflow: hidden"]){overflow:hidden}
 @media (hover:none){html[data-pal] .yzst .yzbig{text-shadow:none}}
 @media (min-width:761px){.yzab .yzimg img{will-change:transform}}
 .palsw{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(20,20,20,.9)!important}
@@ -2381,6 +2386,7 @@ function applyPal(){var v=palName(),de=document.documentElement;if(v==="classic"
 }
 var PAL_OVR=null;
 function render(keepScroll,restoreY){
+  smStop();
   var h=(location.hash||"").replace(/^#/,"");
   if(h==="service-cta-go"||h==="vacancy-apply"){var tgt=document.getElementById(h==="service-cta-go"?"service-cta":"vacancy-apply");if(tgt){tgt.scrollIntoView({behavior:"smooth"});return;}}
   var r=resolve();if(!r) return;
@@ -2468,19 +2474,20 @@ function yzTick(vh,secs,rects){
 }
 /* ---------- scroll stops ("braking") ---------- */
 function snapLayout(vh){
-  var L=app.querySelector(".snapl"),hs=app.querySelector(".hsheets");if(!L||!hs||SC.rm)return;
-  var sy=window.scrollY,base=L.getBoundingClientRect().top+sy,y=hs.getBoundingClientRect().top+sy,B=[],kids=hs.children,wide=window.innerWidth>760;
-  function add(top,h,st){B.push('<i'+(st?' class="st"':'')+' style="top:'+Math.round(top-base)+'px;height:'+Math.max(1,Math.round(h))+'px"></i>');}
+  var L=app.querySelector(".snapl"),hs=app.querySelector(".hsheets");if(!L||!hs||SC.rm){SC.sp=null;return;}
+  var sy=window.scrollY,base=L.getBoundingClientRect().top+sy,y=hs.getBoundingClientRect().top+sy,B=[],SP=[],kids=hs.children,wide=window.innerWidth>760;
+  function add(top,h,st,m){var hh=Math.max(1,Math.round(h));B.push('<i'+(st?' class="st"':'')+' style="top:'+Math.round(top-base)+'px;height:'+hh+'px"></i>');SP.push({t:Math.max(0,Math.round(top)),h:hh,m:!!m});}
   for(var k=0;k<kids.length;k++){var el=kids[k],h=el.getBoundingClientRect().height;
     if(el.classList.contains("yzwrap")){
       var t0=el.getBoundingClientRect().top+sy;
       for(var c=0;c<el.children.length;c++){var sec=el.children[c],sr=sec.getBoundingClientRect(),st=sr.top+sy,sh=sr.height,dist=(sec._h||sh)-vh;
-        if(sec.classList.contains("yzpr")&&dist>0){var n=sec.querySelectorAll(".yzl").length;for(var j=0;j<n;j++)add(st+(n>1?dist*j/(n-1):0),1,true);}
+        if(sec.classList.contains("yzpr")&&dist>0){var n=sec.querySelectorAll(".yzl").length;for(var j=0;j<n;j++)add(st+(n>1?dist*j/(n-1):0),1,true,true);}
         else if(sec.classList.contains("yzst")){add(st,sh,true);if(dist>0)add(st+dist/1.15,1,true);}
         else if(sec.classList.contains("yzab")){add(st,sh,true);if(dist>0&&wide)add(st+dist/1.35,1,true);}}
       y=t0+h;continue;}
     if(k===0)add(0,y+h,true);else add(y,h,true);
     y+=h;}
+  SC.sp=SP;
   var html=B.join("");if(L._h!==html){L._h=html;L.innerHTML=html;}
 }
 /* ---------- home sheets: stacking pages ---------- */
@@ -2521,7 +2528,93 @@ function sheetsWatch(){
   var runs=app.querySelectorAll(".frun");
   if(runs.length){if("IntersectionObserver" in window){SC.fio=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle("run",e.isIntersecting);});},{rootMargin:"100px 0px"});runs.forEach(function(r){SC.fio.observe(r);});}else runs.forEach(function(r){r.classList.add("run");});}
 }
-window.addEventListener("scroll",function(){if(!shRAF)shRAF=requestAnimationFrame(sheetsTick);},{passive:true});
+/* ---------- smooth wheel scrolling (mouse & trackpad): the page glides instead of jumping.
+   On the home page every sheet / featured project is a soft stop: one flick of the wheel moves to the
+   next sheet and the page waits there a moment before it lets you scroll on ---------- */
+var SM={on:false,y:0,t:0,raf:0,last:0,set:-1,idle:0,snap:false,pre:null,dir:0,gate:null,hold:0,bot:false,pk:0};
+function smMax(){return Math.max(0,document.documentElement.scrollHeight-window.innerHeight);}
+function smStops(){var P=SC.sp;return P&&P.length&&document.documentElement.classList.contains("snap-on")?P:null;}
+function smGate(y,dir){var P=smStops();if(!P)return null;var g=null;
+  for(var i=0;i<P.length;i++){var v=P[i].t;if(dir>0?(v>y+1&&(g==null||v<g)):(v<y-1&&(g==null||v>g)))g=v;}return g;}
+function smNative(e){
+  if(e.ctrlKey||document.body.style.overflow==="hidden")return true;
+  var dy=e.deltaY;if(!dy||Math.abs(e.deltaX)>Math.abs(dy))return true;
+  for(var el=e.target;el&&el.nodeType===1&&el!==document.body;el=el.parentElement){
+    var sh=el.scrollHeight,ch=el.clientHeight;
+    if(sh>ch+1){var oy=getComputedStyle(el).overflowY;
+      if((oy==="auto"||oy==="scroll")&&(dy>0?el.scrollTop+ch<sh-1:el.scrollTop>0))return true;}}
+  return false;}
+function smPush(d){
+  var now=performance.now(),dir=d>0?1:-1;
+  if(!SM.raf){SM.y=SM.t=window.scrollY;}
+  if(SM.snap){SM.snap=false;if(SM.pre!=null)SM.t=SM.pre;}
+  SM.pre=null;SM.bot=false;
+  if(dir!==SM.dir){SM.dir=dir;SM.gate=smGate(SM.t,dir);SM.hold=0;SM.pk=0;}
+  var ad=Math.abs(d);if(ad>SM.pk)SM.pk=ad;
+  var t=SM.t+d;
+  /* a stop lets go only for a fresh push (a mouse wheel still turning, a new swipe) — not for a trackpad's fading inertia */
+  if(SM.gate!=null&&(dir>0?t>SM.gate:t<SM.gate)){
+    if(Math.abs(SM.t-SM.gate)<1&&SM.hold&&now-SM.hold>320&&ad>=SM.pk*.5){SM.gate=smGate(SM.gate,dir);SM.hold=0;
+      if(SM.gate!=null&&(dir>0?t>SM.gate:t<SM.gate))t=SM.gate;}
+    else t=SM.gate;}
+  SM.t=Math.max(0,Math.min(smMax(),t));
+  clearTimeout(SM.idle);SM.idle=setTimeout(smSettle,150);
+  smGo();}
+function smWheel(e){
+  if(!SM.on||e.defaultPrevented||smNative(e))return;
+  e.preventDefault();
+  var d=e.deltaY;if(e.deltaMode===1)d*=16.7;else if(e.deltaMode===2)d*=window.innerHeight*.9;
+  smPush(d);}
+function smKey(e){
+  if(!SM.on||e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||document.body.style.overflow==="hidden")return;
+  var a=document.activeElement,tg=a&&a.tagName;
+  if(tg==="INPUT"||tg==="TEXTAREA"||tg==="SELECT"||tg==="BUTTON"||(a&&a.isContentEditable))return;
+  var k=e.key,vh=window.innerHeight,d=0;
+  if(k==="PageDown"||(k===" "&&!e.shiftKey))d=vh*.85;else if(k==="PageUp"||(k===" "&&e.shiftKey))d=-vh*.85;
+  else if(k==="ArrowDown")d=90;else if(k==="ArrowUp")d=-90;
+  else if(k==="Home"||k==="End"){e.preventDefault();if(!SM.raf)SM.y=window.scrollY;SM.snap=false;SM.pre=null;SM.dir=0;SM.gate=null;SM.bot=k==="End";SM.t=k==="Home"?0:smMax();smGo();return;}
+  else return;
+  e.preventDefault();smPush(d);}
+function smGo(){if(!SM.raf){SM.last=performance.now();SM.set=-1;SM.raf=requestAnimationFrame(smStep);}}
+function smStop(){if(typeof SM==="undefined"||!SM)return;if(SM.raf)cancelAnimationFrame(SM.raf);SM.raf=0;clearTimeout(SM.idle);SM.snap=false;SM.pre=null;SM.dir=0;SM.gate=null;SM.hold=0;SM.pk=0;SM.bot=false;SM.set=-1;SM.y=SM.t=window.scrollY;}
+function smStep(now){
+  SM.raf=0;var cur=window.scrollY,ext=SM.set>=0?cur-SM.set:0;
+  if(ext>1||ext<-1){SM.y+=ext;SM.t+=ext;if(SM.pre!=null)SM.pre+=ext;}
+  var dt=Math.min(50,Math.max(1,now-SM.last));SM.last=now;
+  var mx=smMax();if(SM.t>mx||SM.bot)SM.t=mx;
+  SM.y+=(SM.t-SM.y)*(1-Math.exp(-dt/(SM.snap?190:135)));
+  if(Math.abs(SM.t-SM.y)<.5)SM.y=SM.t;
+  window.scrollTo(0,SM.y);SM.set=window.scrollY;
+  if(SM.gate!=null&&!SM.hold&&Math.abs(SM.y-SM.gate)<24)SM.hold=performance.now();
+  if(routeName==="home")sheetsTick();
+  if(SM.y!==SM.t)SM.raf=requestAnimationFrame(smStep);else{SM.set=-1;SM.snap=false;SM.pre=null;}}
+/* after a gesture: never rest half-way between two sheets — finish the move the user started */
+function smRest(y,dir,P){
+  var vh=window.innerHeight,mx=smMax(),A=-1e9,B=1e9,i,b,e;
+  if(Math.abs(y-mx)<=1)return null;
+  for(i=0;i<P.length;i++){b=P[i];
+    if(Math.abs(y-b.t)<=1)return null;
+    if(b.h>vh+2){e=b.t+b.h-vh;if(y>=b.t&&y<=e)return null;if(e<y&&e>A)A=e;if(e>y&&e<B)B=e;}
+    if(b.t<y&&b.t>A)A=b.t;if(b.t>y&&b.t<B)B=b.t;}
+  if(mx<y&&mx>A)A=mx;if(mx>y&&mx<B)B=mx;
+  if(A<-1e8)return B>1e8?null:B;if(B>1e8)return A;
+  var th=Math.min(60,(B-A)*.08);
+  if(dir>0)return y-A>=th?B:A;
+  if(dir<0)return B-y>=th?A:B;
+  return y-A<B-y?A:B;}
+function smSettle(){
+  var dir=SM.dir;SM.dir=0;SM.gate=null;SM.hold=0;SM.pk=0;
+  var P=smStops();if(!SM.on||!P)return;
+  var s=smRest(SM.t,dir,P);
+  if(s!=null&&Math.abs(s-SM.t)>1){SM.pre=SM.t;SM.t=s;SM.snap=true;smGo();}}
+function smInit(){
+  if(SM.on||SC.rm||!window.matchMedia||!matchMedia("(hover:hover) and (pointer:fine)").matches)return;
+  SM.on=true;document.documentElement.classList.add("sm");
+  window.addEventListener("wheel",smWheel,{passive:false});
+  document.addEventListener("keydown",smKey);
+  window.addEventListener("pointerdown",function(e){if(SM.raf&&(e.pointerType!=="mouse"||e.clientX>=document.documentElement.clientWidth))smStop();},{passive:true});}
+smInit();
+window.addEventListener("scroll",function(){if(SM.raf&&routeName==="home"&&Math.abs(window.scrollY-SM.set)<1)return;if(!shRAF)shRAF=requestAnimationFrame(sheetsTick);},{passive:true});
 window.addEventListener("resize",function(){if(SC.touch&&SC.vh&&window.innerWidth===SC.vw)return;SC.vh=0;sheetsLayout();});
 window.addEventListener("load",function(){sheetsLayout();});
 function observe(){

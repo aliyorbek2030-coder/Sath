@@ -871,12 +871,12 @@ header.top.onhx.dk .btn{background:linear-gradient(180deg,#D8B46C,#B8893F)!impor
 .yzwrap{position:relative;z-index:2;background:#F3F6FA}
 .yzs{position:relative}
 .yzsticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.yzst{height:260vh;background:#F3F6FA}
+.yzst{height:160vh;background:#F3F6FA}
 .yzst .yzsticky{display:grid;place-items:center;text-align:center}
 .yzbig{margin:0 auto;max-width:24ch;font:600 clamp(30px,4.1vw,74px)/1.1 var(--display);letter-spacing:-.025em;text-transform:uppercase;color:#0E1B30}
 .yzbig .yw{display:inline-block;white-space:nowrap}
 .yzbig .yc{opacity:.1}
-.yzab{height:300vh;background:#FFFFFF}
+.yzab{height:160vh;background:#FFFFFF}
 .yzab .yzsticky{display:flex;align-items:stretch}
 .yzab .yzimg{flex:none;width:56%;overflow:hidden;position:relative}
 .yzab .yzimg img{position:absolute;inset:0;width:56vw;max-width:none;height:100%;object-fit:cover;filter:none;transform-origin:left center}
@@ -885,7 +885,7 @@ header.top.onhx.dk .btn{background:linear-gradient(180deg,#D8B46C,#B8893F)!impor
 .yzab .yztx p{margin:0;color:#3A4658;font-size:clamp(15px,1.25vw,18px);max-width:54ch}
 .yzab .ppst{max-width:640px}
 .yzab .btn{justify-self:start}
-.yzpr{height:calc(var(--n) * 100vh);background:#0E1B30}
+.yzpr{height:calc((var(--n) - 1) * 60vh + 100vh);background:#0E1B30}
 .yzpr .yzl{position:absolute;inset:0;overflow:hidden}
 .yzpr .yzl+.yzl{clip-path:inset(100% 0 0 0)}
 .yzpr .yzl:first-child{--r:1}
@@ -905,7 +905,7 @@ header.top.onhx.dk .btn{background:linear-gradient(180deg,#D8B46C,#B8893F)!impor
 .yzpr .yzlbl{position:absolute;z-index:61;left:clamp(16px,3vw,40px);bottom:28px;color:#fff;font:500 11.5px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;opacity:.8}
 .yzwrap>.mq{position:relative;z-index:3}
 @media (max-width:760px){
- .yzst{height:220vh}.yzbig{font-size:9vw}
+ .yzst{height:160vh}.yzbig{font-size:9vw}
  .yzab{height:auto}
  .yzab .yzsticky{position:relative;height:auto;flex-direction:column}
  .yzab .yzimg{width:100%;height:42vh}
@@ -1649,31 +1649,31 @@ var P = [
   sub:{ru:"Концепция высотного района на 56 га · 8 вариантов",uz:"56 gektarlik baland binolar tumani konsepsiyasi · 8 variant",en:"Concept for a 56-hectare high-rise district · 8 options",zh:"56 公顷高层街区概念设计 · 8 个方案"},
   loc:{ru:"Ташкент",uz:"Toshkent",en:"Tashkent",zh:"塔什干"},
   d:{ru:"Концепция высотного района Crafer in Botanica на участке 56 гектаров в Ташкенте: в центре — башня-доминанта, вокруг — кварталы высотных зданий, зелёные бульвары и пешеходные улицы. Мы разработали 8 вариантов архитектурной идеи, здесь собраны ключевые визуализации.",uz:"Toshkentdagi 56 gektarlik uchastkada Crafer in Botanica baland binolar tumani konsepsiyasi: markazda — dominant minora, atrofida — baland binolar kvartallari, yashil bulvarlar va piyodalar ko‘chalari. Arxitektura g‘oyasining 8 ta variantini ishlab chiqdik, bu yerda asosiy vizualizatsiyalar jamlangan.",en:"Crafer in Botanica is a concept for a high-rise district on a 56-hectare site in Tashkent: a landmark tower at the centre, surrounded by blocks of tall buildings, green boulevards and pedestrian streets. We developed 8 options for the architectural idea; the key visuals are collected here.",zh:"Crafer in Botanica：位于塔什干、占地 56 公顷的高层街区概念设计。中心是一座地标塔楼，周围是高层建筑街区、绿色林荫大道和步行街。我们完成了 8 个建筑方案，这里汇集了主要效果图。"}},
- {s:"bochka-kids",type:"interior",img:"kdz-cover",status:"dp",parent:"bochka",port:1,plan:"kdz-plan",planT:{ru:"План",uz:"Reja",en:"Plan",zh:"平面图"},gal:["kdz01","kdz02","kdz03","kdz04","kdz05","kdz06","kdz07","kdz08","kdz09","kdz10","kdz11","kdz12","kdz13","kdz14","kdz15","kdz16"],svc:["interior","visualization"],
+ {s:"bochka-kids",type:"interior",img:"kdz-cover",status:"build",parent:"bochka",port:1,plan:"kdz-plan",planT:{ru:"План",uz:"Reja",en:"Plan",zh:"平面图"},gal:["kdz01","kdz02","kdz03","kdz04","kdz05","kdz06","kdz07","kdz08","kdz09","kdz10","kdz11","kdz12","kdz13","kdz14","kdz15","kdz16"],svc:["interior","visualization"],
   facts:{area:{ru:"450 м²",uz:"450 m²",en:"450 m²",zh:"450 平方米"},style:{ru:"Сказочный интерьер в подводном стиле",uz:"Suv osti uslubidagi ertaknamo interyer",en:"Fairy-tale interior with an underwater theme",zh:"海底主题童话风格"}},
   t:{ru:"Детская игровая зона в ТРЦ «Бочка»",uz:"«Bochka» SKMdagi bolalar o‘yin zonasi",en:"Children’s play area at Bochka Mall",zh:"Bochka 购物中心儿童游乐区"},
   sub:{ru:"Сказочный подводный мир · 450 м²",uz:"Ertaknamo suv osti olami · 450 m²",en:"A fairy-tale underwater world · 450 m²",zh:"童话般的海底世界 · 450 平方米"},
   loc:{ru:"Туристическая зона, Ташкентская область",uz:"Turistik hudud, Toshkent viloyati",en:"Tourist area, Tashkent Region",zh:"塔什干州旅游区"},
   d:{ru:"Детская игровая зона площадью 450 м² в ТРЦ «Бочка» в сказочном подводном стиле. Под потолком плывут облака-светильники и медузы, на полу — ковёр с морскими узорами, в центре — карусель. Вокруг — замки и башни, сцена для фото, гримёрные, комната с костюмами и зона для праздников.",uz:"«Bochka» SKMdagi 450 m² maydonli bolalar o‘yin zonasi, ertaknamo suv osti uslubida. Shift ostida bulut-chiroqlar va meduzalar suzadi, polda dengiz naqshli gilam, markazda karusel. Atrofida qasr va minoralar, suratga tushish sahnasi, grim xonalari, liboslar xonasi va bayramlar uchun zona.",en:"A 450 m² children’s play area at Bochka Mall, designed as a fairy-tale underwater world. Cloud lights and jellyfish float under the ceiling, the carpet is patterned with sea life and a carousel stands at the centre. Around it are castles and towers, a photo stage, make-up stations, a costume room and a party area.",zh:"Bochka 购物中心内 450 平方米的儿童游乐区，以童话般的海底世界为主题。天花板下漂浮着云朵灯和水母，地毯上是海洋图案，中央是旋转木马。四周有城堡和塔楼、拍照舞台、化妆间、服装间和派对区。"}},
- {s:"pushkin-apartment",type:"interior",img:"pka-cover",status:"dp",parent:"pushkin",port:1,gal:["pka01","pka02","pka03","pka04","pka05","pka06","pka07","pka08","pka09","pka10","pka11","pka12","pka13","pka14","pka15","pka16","pka17","pka18"],svc:["interior","visualization"],
+ {s:"pushkin-apartment",type:"interior",img:"pka-cover",status:"build",parent:"pushkin",port:1,gal:["pka01","pka02","pka03","pka04","pka05","pka06","pka07","pka08","pka09","pka10","pka11","pka12","pka13","pka14","pka15","pka16","pka17","pka18"],svc:["interior","visualization"],
   facts:{area:{ru:"88 м²",uz:"88 m²",en:"88 m²",zh:"88 平方米"},style:{ru:"Современная классика",uz:"Zamonaviy klassika",en:"Modern classic",zh:"现代古典"}},
   t:{ru:"Квартира в ЖК Pushkin",uz:"Pushkin TJMdagi xonadon",en:"Apartment in Pushkin",zh:"Pushkin 住宅公寓"},
   sub:{ru:"Интерьер квартиры 88 м² · современная классика",uz:"88 m² xonadon interyeri · zamonaviy klassika",en:"88 m² apartment interior · modern classic",zh:"88 平方米公寓室内 · 现代古典"},
   loc:{ru:"Мирзо-Улугбекский район, Ташкент",uz:"Mirzo Ulug‘bek tumani, Toshkent",en:"Mirzo-Ulugbek district, Tashkent",zh:"塔什干米尔佐-乌鲁格别克区"},
   d:{ru:"Интерьер квартиры площадью 88 м² в жилом комплексе Pushkin в стиле современной классики. Прихожая отделана мрамором, зеркальными панелями и тёмным деревом, гостиная объединена со столовой, на кухне — мраморная барная стойка и встроенная техника. В спальне — лепнина и гардероб за стеклом, в детской — двухъярусная кровать и рабочее место, ванные отделаны камнем и деревом.",uz:"Pushkin turar-joy majmuasidagi 88 m² maydonli xonadon interyeri, zamonaviy klassika uslubida. Dahliz marmar, ko‘zgu panellar va to‘q rangli yog‘och bilan pardozlangan, mehmonxona ovqatlanish zonasi bilan birlashtirilgan, oshxonada marmar bar peshtaxtasi va o‘rnatilgan texnika. Yotoqxonada gipsli bezaklar va shisha garderob, bolalar xonasida ikki qavatli karavot va ish joyi, hammomlar tosh va yog‘och bilan pardozlangan.",en:"An 88 m² apartment in the Pushkin residential complex, designed in a modern classic style. The entrance hall is finished in marble, mirror panels and dark wood; the living room opens onto the dining area; the kitchen has a marble breakfast bar and built-in appliances. The bedroom has ceiling mouldings and a glass-fronted wardrobe, the children’s room a bunk bed and a desk, and the bathrooms are clad in stone and wood.",zh:"Pushkin 住宅区内一套 88 平方米的公寓，采用现代古典风格。门厅以大理石、镜面板和深色木材装饰；客厅与餐厅相连；厨房配有大理石吧台和嵌入式电器。卧室有石膏线脚和玻璃衣柜，儿童房设有双层床和书桌，浴室采用石材与木材饰面。"}},
- {s:"chimgan-dacha",type:"interior",img:"dch-cover",status:"dp",port:1,plan:"dch-plan",planT:{ru:"Планы 1 и 2 этажей",uz:"1 va 2-qavat rejalari",en:"Ground and upper floor plans",zh:"一层和二层平面图"},gal:["dch01","dch02","dch03","dch04","dch05","dch06","dch07","dch08","dch09","dch10","dch11","dch12","dch13","dch14","dch15","dch16","dch17","dch18","dch19"],svc:["interior","visualization"],
+ {s:"chimgan-dacha",type:"interior",img:"dch-cover",status:"build",port:1,plan:"dch-plan",planT:{ru:"Планы 1 и 2 этажей",uz:"1 va 2-qavat rejalari",en:"Ground and upper floor plans",zh:"一层和二层平面图"},gal:["dch01","dch02","dch03","dch04","dch05","dch06","dch07","dch08","dch09","dch10","dch11","dch12","dch13","dch14","dch15","dch16","dch17","dch18","dch19"],svc:["interior","visualization"],
   facts:{year:{ru:"Проект — 2025",uz:"Loyiha — 2025",en:"Designed in 2025",zh:"2025 年设计"},area:{ru:"440 м²",uz:"440 m²",en:"440 m²",zh:"440 平方米"},floors:{ru:"2 этажа",uz:"2 qavat",en:"2 floors",zh:"2 层"},style:{ru:"Современное шале",uz:"Zamonaviy shale",en:"Modern chalet",zh:"现代木屋风格"}},
   t:{ru:"Дача в Чимгане",uz:"Chimyondagi dacha",en:"Chalet in Chimgan",zh:"奇姆甘度假别墅"},
   sub:{ru:"Интерьер загородного дома 440 м² · современное шале",uz:"440 m² shahar tashqarisidagi uy interyeri · zamonaviy shale",en:"440 m² country house interior · modern chalet",zh:"440 平方米乡间别墅室内 · 现代木屋风格"},
   loc:{ru:"Чимган, Ташкентская область",uz:"Chimyon, Toshkent viloyati",en:"Chimgan, Tashkent Region",zh:"塔什干州奇姆甘"},
   d:{ru:"Интерьер двухэтажного загородного дома площадью 440 м² в горах Чимгана в стиле современного шале. Центр дома — холл со вторым светом и подвесным камином, вокруг — гостиные, столовая, кухня, спальни, детская и ванные комнаты. Стены и потолки отделаны светлым деревом, большие окна выходят на горы.",uz:"Chimyon tog‘laridagi 440 m² maydonli ikki qavatli shahar tashqarisidagi uy interyeri, zamonaviy shale uslubida. Uyning markazi — ikkinchi yorug‘likli va osma kaminli zal, atrofida mehmonxonalar, ovqatlanish xonasi, oshxona, yotoqxonalar, bolalar xonasi va hammomlar. Devor va shiftlar ochiq rangli yog‘och bilan pardozlangan, katta derazalar tog‘larga qaraydi.",en:"A 440 m² two-storey country house in the Chimgan mountains, designed as a modern chalet. At its heart is a double-height hall with a suspended fireplace, surrounded by living rooms, a dining room, kitchen, bedrooms, a children’s room and bathrooms. Walls and ceilings are clad in light timber, and large windows look out onto the mountains.",zh:"位于奇姆甘山区的一栋 440 平方米两层乡间别墅，采用现代木屋风格。核心是挑高大厅和悬挂式壁炉，四周是起居室、餐厅、厨房、卧室、儿童房和浴室。墙面和天花板采用浅色木材饰面，大窗面向群山。"}},
- {s:"qazi-office",type:"interior",img:"qzo01",status:"dp",port:1,wide:["qzo01","qzo02","qzo03","qzo11","qzo12","qzo13","qzo15","qzo16"],gal:["qzo01","qzo02","qzo03","qzo04","qzo05","qzo06","qzo07","qzo08","qzo09","qzo10","qzo11","qzo12","qzo13","qzo14","qzo15","qzo16"],svc:["interior","visualization"],
+ {s:"qazi-office",type:"interior",img:"qzo01",status:"done",port:1,wide:["qzo01","qzo02","qzo03","qzo11","qzo12","qzo13","qzo15","qzo16"],gal:["qzo01","qzo02","qzo03","qzo04","qzo05","qzo06","qzo07","qzo08","qzo09","qzo10","qzo11","qzo12","qzo13","qzo14","qzo15","qzo16"],svc:["interior","visualization"],
   facts:{area:{ru:"1200 м²",uz:"1200 m²",en:"1,200 m²",zh:"1,200 平方米"},floors:{ru:"4 этажа",uz:"4 qavat",en:"4 floors",zh:"4 层"},style:{ru:"Нео-ар-деко с элементами современной классики",uz:"Zamonaviy klassika elementlari bilan neo-ar-deko",en:"Neo-Art Deco with contemporary classic touches",zh:"融合当代古典元素的新装饰艺术风格"}},
   t:{ru:"Офис Qazi mahalla",uz:"Qazi mahalla ofisi",en:"Qazi Mahalla office",zh:"Qazi Mahalla 办公楼"},
   sub:{ru:"Интерьер офисного здания · 4 этажа, 1200 м²",uz:"Ofis binosi interyeri · 4 qavat, 1200 m²",en:"Office building interior · 4 floors, 1,200 m²",zh:"办公楼室内 · 4 层，1,200 平方米"},
   loc:{ru:"Юнусабадский район, Ташкент",uz:"Yunusobod tumani, Toshkent",en:"Yunusabad district, Tashkent",zh:"塔什干尤努萨巴德区"},
   d:{ru:"Корректировка проекта офисного здания в Юнусабадском районе Ташкента: интерьеры четырёх этажей общей площадью 1200 м² в стиле нео-ар-деко с элементами современной классики. Ресепшн с мраморной стойкой, коридоры с деревянными панелями, переговорные с люстрами-ветвями, кабинеты руководителей, открытый офис, столовая, зона отдыха и клиентский зал с банкоматами.",uz:"Toshkentning Yunusobod tumanidagi ofis binosi loyihasiga tuzatishlar: umumiy maydoni 1200 m² bo‘lgan to‘rt qavat interyerlari, zamonaviy klassika elementlari bilan neo-ar-deko uslubida. Marmar peshtaxtali qabulxona, yog‘och panelli yo‘laklar, shox shaklidagi qandilli majlislar zallari, rahbarlar xonalari, ochiq ofis, oshxona, dam olish zonasi va bankomatli mijozlar zali.",en:"A revised design for an office building in Tashkent’s Yunusabad district: interiors for four floors totalling 1,200 m² in a neo-Art Deco style with contemporary classic touches. A reception with a marble desk, wood-panelled corridors, meeting rooms with branch-like chandeliers, executive offices, an open-plan office, a canteen, a lounge and a customer hall with ATMs.",zh:"塔什干尤努萨巴德区一栋办公楼的设计调整：四层共 1,200 平方米的室内设计，采用融合当代古典元素的新装饰艺术风格。包括大理石前台、木饰面走廊、配有枝形吊灯的会议室、管理层办公室、开放式办公区、员工餐厅、休息区以及设有自动取款机的客户大厅。"}},
- {s:"qazi-showroom",type:"interior",img:"qzs-cover",status:"dp",parent:"qazi-office",port:1,par:"2/3",lar:"4/3",gal:["qzs01","qzs02","qzs03","qzs04","qzs05","qzs06","qzs07","qzs08","qzs09","qzs10","qzs11","qzs12","qzs13"],svc:["interior","visualization"],
+ {s:"qazi-showroom",type:"interior",img:"qzs-cover",status:"done",parent:"qazi-office",port:1,par:"2/3",lar:"4/3",gal:["qzs01","qzs02","qzs03","qzs04","qzs05","qzs06","qzs07","qzs08","qzs09","qzs10","qzs11","qzs12","qzs13"],svc:["interior","visualization"],
   facts:{area:{ru:"165 м²",uz:"165 m²",en:"165 m²",zh:"165 平方米"},style:{ru:"Нео-ар-деко с элементами современной классики",uz:"Zamonaviy klassika elementlari bilan neo-ar-deko",en:"Neo-Art Deco with contemporary classic touches",zh:"融合当代古典元素的新装饰艺术风格"}},
   t:{ru:"Шоурум Qazi mahalla",uz:"Qazi mahalla shourumi",en:"Qazi Mahalla showroom",zh:"Qazi Mahalla 展厅"},
   sub:{ru:"Шоурум банковского оборудования · 165 м²",uz:"Bank uskunalari shourumi · 165 m²",en:"Banking equipment showroom · 165 m²",zh:"银行设备展厅 · 165 平方米"},
@@ -2179,7 +2179,7 @@ function svcStrip(){
 }
 function phChips(p,lnk){if(!p.phases||!p.phases.length)return "";return '<div class="phs">'+p.phases.filter(function(f){return lnk||!f.s;}).map(function(f){var k=STATUS[f.st]?f.st:"design",cur=lnk&&f.s===p.s,a=lnk&&f.s&&!cur&&prjBy(f.s);if(cur)return '<span class="ph ph-'+k+' ph-cur" aria-current="page"><b>'+esc(T(f.t))+'</b>'+u(STATUS[k])+'</span>';return a?'<a class="ph ph-'+k+'" href="#project-'+esc(f.s)+'"><b>'+esc(T(f.t))+'</b>'+u(STATUS[k])+' '+ARW+'</a>':'<span class="ph ph-'+k+'"><b>'+esc(T(f.t))+'</b>'+u(STATUS[k])+'</span>';}).join("")+'</div>';}
 function doneBlock(){
-  var L=P.filter(function(p){return p.status==="done"||p.status==="build"||(p.phases||[]).some(function(f){return f.st==="done";});});if(!L.length)return "";
+  var L=P.filter(function(p){return p.type!=="interior"&&(p.status==="done"||p.status==="build"||(p.phases||[]).some(function(f){return f.st==="done";}));});if(!L.length)return "";
   L.sort(function(a,b){return (a.status==="done"?0:1)-(b.status==="done"?0:1);});
   var stD=u("done_stamp"),stB=u("build_stamp");
   return '<section class="sec wrap dnsec"><div class="sechead"><div><span class="lbl">'+u("done_lbl")+' · '+L.length+'</span><h2>'+u("done_h")+'</h2></div><p class="muted" style="max-width:40ch;margin:0">'+u("done_p")+'</p></div>'+
@@ -2590,7 +2590,7 @@ function sheetsWatch(){
 /* ---------- smooth wheel scrolling (mouse & trackpad): the page glides instead of jumping.
    On the home page every sheet / featured project is a soft stop: one flick of the wheel moves to the
    next sheet and the page waits there a moment before it lets you scroll on ---------- */
-var SM={on:false,y:0,t:0,raf:0,last:0,set:-1,idle:0,snap:false,pre:null,dir:0,gate:null,hold:0,bot:false,pk:0};
+var SM={on:false,y:0,t:0,raf:0,last:0,set:-1,idle:0,snap:false,pre:null,dir:0,gate:null,hold:0,bot:false,pk:0,ld:0};
 function smMax(){return Math.max(0,document.documentElement.scrollHeight-window.innerHeight);}
 function smStops(){var P=SC.sp;return P&&P.length&&document.documentElement.classList.contains("snap-on")?P:null;}
 function smGate(y,dir){var P=smStops();if(!P)return null;var g=null;
@@ -2608,12 +2608,14 @@ function smPush(d){
   if(!SM.raf){SM.y=SM.t=window.scrollY;}
   if(SM.snap){SM.snap=false;if(SM.pre!=null)SM.t=SM.pre;}
   SM.pre=null;SM.bot=false;
-  if(dir!==SM.dir){SM.dir=dir;SM.gate=smGate(SM.t,dir);SM.hold=0;SM.pk=0;}
+  if(dir!==SM.dir){SM.dir=dir;SM.gate=smGate(SM.t,dir);SM.hold=0;SM.pk=0;SM.ld=0;}
   var ad=Math.abs(d);if(ad>SM.pk)SM.pk=ad;
+  /* fading trackpad / free-spin inertia never counts as a new push */
+  var fresh=ad>=SM.pk*.6&&ad>=SM.ld*.98;SM.ld=ad;
   var t=SM.t+d;
   /* a stop lets go only for a fresh push (a mouse wheel still turning, a new swipe) — not for a trackpad's fading inertia */
   if(SM.gate!=null&&(dir>0?t>SM.gate:t<SM.gate)){
-    if(Math.abs(SM.t-SM.gate)<1&&SM.hold&&now-SM.hold>320&&ad>=SM.pk*.5){SM.gate=smGate(SM.gate,dir);SM.hold=0;
+    if(Math.abs(SM.t-SM.gate)<1&&SM.hold&&now-SM.hold>400&&fresh){SM.gate=smGate(SM.gate,dir);SM.hold=0;
       if(SM.gate!=null&&(dir>0?t>SM.gate:t<SM.gate))t=SM.gate;}
     else t=SM.gate;}
   SM.t=Math.max(0,Math.min(smMax(),t));
@@ -2622,7 +2624,7 @@ function smPush(d){
 function smWheel(e){
   if(!SM.on||e.defaultPrevented||smNative(e))return;
   e.preventDefault();
-  var d=e.deltaY;if(e.deltaMode===1)d*=16.7;else if(e.deltaMode===2)d*=window.innerHeight*.9;
+  var d=e.deltaY;if(e.deltaMode===1)d*=16.7;if(e.deltaMode===2)d=(d>0?1:-1)*window.innerHeight*.85;else d=Math.max(-150,Math.min(150,d));
   smPush(d);}
 function smKey(e){
   if(!SM.on||e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||document.body.style.overflow==="hidden")return;
@@ -2635,7 +2637,7 @@ function smKey(e){
   else return;
   e.preventDefault();smPush(d);}
 function smGo(){if(!SM.raf){SM.last=performance.now();SM.set=-1;SM.raf=requestAnimationFrame(smStep);}}
-function smStop(){if(typeof SM==="undefined"||!SM)return;if(SM.raf)cancelAnimationFrame(SM.raf);SM.raf=0;clearTimeout(SM.idle);SM.snap=false;SM.pre=null;SM.dir=0;SM.gate=null;SM.hold=0;SM.pk=0;SM.bot=false;SM.set=-1;SM.y=SM.t=window.scrollY;}
+function smStop(){if(typeof SM==="undefined"||!SM)return;if(SM.raf)cancelAnimationFrame(SM.raf);SM.raf=0;clearTimeout(SM.idle);SM.snap=false;SM.pre=null;SM.dir=0;SM.gate=null;SM.hold=0;SM.pk=0;SM.ld=0;SM.bot=false;SM.set=-1;SM.y=SM.t=window.scrollY;}
 function smStep(now){
   SM.raf=0;var cur=window.scrollY,ext=SM.set>=0?cur-SM.set:0;
   if(ext>1||ext<-1){SM.y+=ext;SM.t+=ext;if(SM.pre!=null)SM.pre+=ext;}
@@ -2647,24 +2649,18 @@ function smStep(now){
   if(SM.gate!=null&&!SM.hold&&Math.abs(SM.y-SM.gate)<24)SM.hold=performance.now();
   if(routeName==="home")sheetsTick();
   if(SM.y!==SM.t)SM.raf=requestAnimationFrame(smStep);else{SM.set=-1;SM.snap=false;SM.pre=null;}}
-/* after a gesture: never rest half-way between two sheets — finish the move the user started */
-function smRest(y,dir,P){
-  var vh=window.innerHeight,mx=smMax(),A=-1e9,B=1e9,i,b,e;
+/* after a gesture the page stays where the wheel left it; only a near miss of a stop is tidied up */
+function smNear(y,P){
+  var vh=window.innerHeight,mx=smMax(),M=Math.min(72,vh*.08),best=null,bd=M+1,i,b,e,d;
   if(Math.abs(y-mx)<=1)return null;
   for(i=0;i<P.length;i++){b=P[i];
-    if(Math.abs(y-b.t)<=1)return null;
-    if(b.h>vh+2){e=b.t+b.h-vh;if(y>=b.t&&y<=e)return null;if(e<y&&e>A)A=e;if(e>y&&e<B)B=e;}
-    if(b.t<y&&b.t>A)A=b.t;if(b.t>y&&b.t<B)B=b.t;}
-  if(mx<y&&mx>A)A=mx;if(mx>y&&mx<B)B=mx;
-  if(A<-1e8)return B>1e8?null:B;if(B>1e8)return A;
-  var th=Math.min(60,(B-A)*.08);
-  if(dir>0)return y-A>=th?B:A;
-  if(dir<0)return B-y>=th?A:B;
-  return y-A<B-y?A:B;}
+    if(b.h>vh+2){e=b.t+b.h-vh;if(y>b.t+1&&y<e-1)return null;d=Math.abs(e-y);if(d<bd){bd=d;best=e;}}
+    d=Math.abs(b.t-y);if(d<bd){bd=d;best=b.t;}}
+  return best!=null&&bd>1?best:null;}
 function smSettle(){
-  var dir=SM.dir;SM.dir=0;SM.gate=null;SM.hold=0;SM.pk=0;
+  SM.dir=0;SM.gate=null;SM.hold=0;SM.pk=0;SM.ld=0;
   var P=smStops();if(!SM.on||!P)return;
-  var s=smRest(SM.t,dir,P);
+  var s=smNear(SM.t,P);
   if(s!=null&&Math.abs(s-SM.t)>1){SM.pre=SM.t;SM.t=s;SM.snap=true;smGo();}}
 function smInit(){
   if(SM.on||SC.rm||!window.matchMedia||!matchMedia("(hover:hover) and (pointer:fine)").matches)return;

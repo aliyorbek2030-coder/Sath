@@ -1200,8 +1200,17 @@ body:has(.menu) .palsw,body:has(.lb) .palsw{display:none!important}
 /* hero: the photo fills the first screen, SATH in white on top */
 .h8ph{background:#0B1A24}
 .h8ph::before{display:none}
-.h8ph .h8bg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;transform:scale(1.04);animation:h8zoom 26s ease-in-out infinite alternate}
-@keyframes h8zoom{to{transform:scale(1.12)}}
+.h8ph .h8pic{position:absolute;inset:0;z-index:0;display:block}
+.h8ph .h8bg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;animation:h8zoom 30s ease-in-out infinite alternate}
+@keyframes h8zoom{from{transform:none}to{transform:scale(1.05)}}
+/* the first screen sits right below the header and fits the window, also on short laptop screens */
+.hsheets>.sheet.s0,.hsheets>.sheet.s0>.shin{min-height:calc(100svh - 73px)}
+.hsheets .h8{margin-top:0;min-height:calc(100svh - 73px)}
+@media (min-width:601px){.h8big{font-size:clamp(70px,min(24vw,30vh),420px)}.h8mk{height:clamp(90px,min(30vw,40vh),520px)}.h8in{padding-block:clamp(16px,4vh,48px);gap:clamp(8px,min(1.6vw,2vh),22px)}}
+@media (min-width:601px) and (max-height:520px){.h8l{display:none}.h8big{font-size:26vh}.h8mk{height:34vh}}
+@media (max-width:600px){.hsheets .h8in{padding-block:clamp(20px,5vh,48px) calc(clamp(20px,4vh,40px) + 56px)}}
+@media (max-width:600px) and (max-height:620px){.h8l{display:none}}
+@media (max-width:380px){.h8pp{font-size:20px;letter-spacing:.12em}}
 .h8ph .h8sh{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(5,18,28,.6) 0%,rgba(5,18,28,.3) 36%,rgba(5,18,28,.4) 60%,rgba(5,18,28,.8) 100%)}
 .h8ph .h8in{z-index:1}
 .h8ph .h8big{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:#fff!important;-webkit-text-fill-color:#fff;animation:none;text-shadow:0 18px 60px rgba(0,0,0,.35)}
@@ -1470,7 +1479,7 @@ var STATUS = {done:"st_done",build:"st_build",work:"st_work",design:"st_design",
 function stKey(p){return STATUS[p.status]?p.status:"design";}
 function stg(p,cls){var k=stKey(p);return '<span class="stg stg-'+k+(cls?' '+cls:'')+'">'+(k==="done"?'<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.3l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<i aria-hidden="true"></i>')+u(STATUS[k])+'</span>';}
 
-var SITE={phone:"+998 78 555 00 03",email:"",telegram:"https://t.me/pearlprojectsath",whatsapp:"",instagram:"https://www.instagram.com/pearlproject_sath.uz/",feat:["airport-mall","pushkin","crafers","samsarak"],hero:"crf01",heroBg:1,heroStyle:"letters",palette:"teal"};
+var SITE={phone:"+998 78 555 00 03",email:"",telegram:"https://t.me/pearlprojectsath",whatsapp:"",instagram:"https://www.instagram.com/pearlproject_sath.uz/",feat:["airport-mall","pushkin","crafers","samsarak"],hero:"hero-crf",heroBg:1,heroStyle:"letters",palette:"teal"};
 function telHref(){return "tel:"+String(SITE.phone||"").replace(/[^\d+]/g,"");}
 function tgHref(){var t=String(SITE.telegram||"").trim();if(!t)return "";if(/^https?:/.test(t))return t;return "https://t.me/"+t.replace(/^@/,"");}
 function waHref(){var t=String(SITE.whatsapp||"").trim();if(!t)return "";if(/^https?:/.test(t))return t;return "https://wa.me/"+t.replace(/\D/g,"");}
@@ -1957,7 +1966,7 @@ var IMGPOS={"sc-elev":"80% 58%"};
 function ipos(k){return IMGPOS[k]?' style="object-position:'+IMGPOS[k]+'"':"";}
 function IMG(k,alt,sizes,eager){if(/^https?:/.test(k))return '<img src="'+esc(k)+'" alt="'+esc(alt||"")+'"'+(eager?'':' loading="lazy"')+' decoding="async" referrerpolicy="no-referrer">';return '<img src="img/'+k+'-900.jpg" srcset="img/'+k+'-900.jpg 900w, img/'+k+'-1800.jpg 1800w" sizes="'+(sizes||"(max-width:700px) 100vw, 50vw")+'" alt="'+esc(alt||"")+'"'+ipos(k)+(eager?'':' loading="lazy"')+' decoding="async">';}
 /* if a smaller copy of a picture is missing, the large one is shown instead */
-window.addEventListener("error",function(e){var t=e.target;if(!t||t.tagName!=="IMG"||t._fb)return;var m=(t.currentSrc||t.src||"").match(/^(.*\/img\/[^\/?#]+)-(600|900|1400)\.jpg$/);if(!m)return;t._fb=1;t.removeAttribute("srcset");t.src=m[1]+"-1800.jpg";},true);
+window.addEventListener("error",function(e){var t=e.target;if(!t||t.tagName!=="IMG"||t._fb)return;var m=(t.currentSrc||t.src||"").match(/^(.*\/img\/[^\/?#]+)-(600|900|1400|2560|m)\.jpg$/);if(!m)return;t._fb=1;var pc=t.parentNode;if(pc&&pc.tagName==="PICTURE")[].slice.call(pc.querySelectorAll("source")).forEach(function(x){x.remove();});t.removeAttribute("srcset");t.src=m[1]+"-1800.jpg";},true);
 function pcard(p,wide){
   return '<a class="pcard rv'+(wide?' wide':'')+'" href="#project-'+p.s+'">'+
    '<div class="art">'+IMG(p.img,T(p.t),"(max-width:600px) 100vw, 33vw")+stg(p)+'<div class="hov"><span>'+T(p.sub)+'</span><span>→</span></div></div>'+
@@ -2156,7 +2165,7 @@ function hxSath(){return '<div class="hxa" aria-label="Structures, Architecture,
 function heroLetters(){
   var ph=!!(SITE.hero&&SITE.heroBg);
   return '<section class="h8'+(ph?' h8ph':'')+'" aria-label="SATH · Pearl Project LLC">'+
-   (ph?'<img class="h8bg" src="'+heroImg(true)+'" srcset="'+heroImg(false)+' 900w, '+heroImg(true)+' 1800w" sizes="100vw" alt="" fetchpriority="high"><i class="h8sh" aria-hidden="true"></i>':'')+
+   (ph?'<picture class="h8pic"><source media="(max-aspect-ratio: 4/5)" srcset="img/'+SITE.hero+'-m.jpg"><img class="h8bg" src="'+heroImg(true)+'" srcset="'+heroImg(false)+' 900w, '+heroImg(true)+' 1800w, img/'+SITE.hero+'-2560.jpg 2560w" sizes="100vw" alt="" fetchpriority="high"></picture><i class="h8sh" aria-hidden="true"></i>':'')+
    '<div class="wrap h8in">'+
    '<div class="h8lock">'+logoMark("h8mk")+'<h1 class="h8big" aria-label="SATH — Pearl Project LLC"'+(ph?'':' style="background-image:url(\''+heroImg(true)+'\')"')+'>SATH</h1></div>'+
    hxSath()+

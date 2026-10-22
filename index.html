@@ -1891,6 +1891,8 @@ function footer(){
 var IMGPOS={"sc-elev":"80% 58%"};
 function ipos(k){return IMGPOS[k]?' style="object-position:'+IMGPOS[k]+'"':"";}
 function IMG(k,alt,sizes,eager){if(/^https?:/.test(k))return '<img src="'+esc(k)+'" alt="'+esc(alt||"")+'"'+(eager?'':' loading="lazy"')+' decoding="async" referrerpolicy="no-referrer">';return '<img src="img/'+k+'-900.jpg" srcset="img/'+k+'-900.jpg 900w, img/'+k+'-1800.jpg 1800w" sizes="'+(sizes||"(max-width:700px) 100vw, 50vw")+'" alt="'+esc(alt||"")+'"'+ipos(k)+(eager?'':' loading="lazy"')+' decoding="async">';}
+/* if a smaller copy of a picture is missing, the large one is shown instead */
+window.addEventListener("error",function(e){var t=e.target;if(!t||t.tagName!=="IMG"||t._fb)return;var m=(t.currentSrc||t.src||"").match(/^(.*\/img\/[^\/?#]+)-(600|900|1400)\.jpg$/);if(!m)return;t._fb=1;t.removeAttribute("srcset");t.src=m[1]+"-1800.jpg";},true);
 function pcard(p,wide){
   return '<a class="pcard rv'+(wide?' wide':'')+'" href="#project-'+p.s+'">'+
    '<div class="art">'+IMG(p.img,T(p.t),"(max-width:600px) 100vw, 33vw")+stg(p)+'<div class="hov"><span>'+T(p.sub)+'</span><span>→</span></div></div>'+

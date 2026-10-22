@@ -871,11 +871,12 @@ header.top.onhx.dk .btn{background:linear-gradient(180deg,#D8B46C,#B8893F)!impor
 .yzwrap{position:relative;z-index:2;background:#F3F6FA}
 .yzs{position:relative}
 .yzsticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.yzst{height:160vh;background:#F3F6FA}
+.yzst{height:100vh;height:100svh;background:#F3F6FA}
 .yzst .yzsticky{display:grid;place-items:center;text-align:center}
 .yzbig{margin:0 auto;max-width:24ch;font:600 clamp(30px,4.1vw,74px)/1.1 var(--display);letter-spacing:-.025em;text-transform:uppercase;color:#0E1B30}
 .yzbig .yw{display:inline-block;white-space:nowrap}
-.yzbig .yc{opacity:.1}
+.yzbig .yc{display:inline-block;opacity:.1;transform:translateY(.14em);transition:opacity .6s cubic-bezier(.25,.6,.3,1),transform .6s cubic-bezier(.25,.6,.3,1)}
+.yzst.play .yzbig .yc,html[data-pal] .yzst.play .yzbig .yc{opacity:1;transform:none;transition-delay:calc(var(--i) * 1.5s / var(--n))}
 .yzab{height:160vh;background:#FFFFFF}
 .yzab .yzsticky{display:flex;align-items:stretch}
 .yzab .yzimg{flex:none;width:56%;overflow:hidden;position:relative}
@@ -905,7 +906,7 @@ header.top.onhx.dk .btn{background:linear-gradient(180deg,#D8B46C,#B8893F)!impor
 .yzpr .yzlbl{position:absolute;z-index:61;left:clamp(16px,3vw,40px);bottom:28px;color:#fff;font:500 11.5px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;opacity:.8}
 .yzwrap>.mq{position:relative;z-index:3}
 @media (max-width:760px){
- .yzst{height:160vh}.yzbig{font-size:9vw}
+ .yzst{height:100vh;height:100svh}.yzbig{font-size:9vw}
  .yzab{height:auto}
  .yzab .yzsticky{position:relative;height:auto;flex-direction:column}
  .yzab .yzimg{width:100%;height:42vh}
@@ -916,7 +917,7 @@ header.top.onhx.dk .btn{background:linear-gradient(180deg,#D8B46C,#B8893F)!impor
 }
 @media (prefers-reduced-motion:reduce){
  .yzst,.yzab,.yzpr{height:auto}.yzsticky{position:relative;height:auto;min-height:0}
- .yzst .yzsticky{padding:120px 0}.yzbig .yc{opacity:1}
+ .yzst .yzsticky{padding:120px 0}.yzbig .yc{opacity:1;transform:none;transition:none}
  .yzab .yzimg{width:45%;min-height:60vh}.yzab .yzimg img{filter:none;transform:none}
  .yzpr .yzl{position:relative;height:80vh;clip-path:none}.yzpr .yzl img{transform:none}.yzpr .yzcap,.yzpr .yzsh,.yzpr .yzdots{display:none}
 }
@@ -1182,7 +1183,7 @@ html:has(>body[style*="overflow: hidden"]){overflow:hidden}
 @media (hover:none){html[data-pal] .yzst .yzbig{text-shadow:none}}
 @media (min-width:761px){.yzab .yzimg img{will-change:transform}}
 .palsw{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(20,20,20,.9)!important}
-@media (prefers-reduced-motion:reduce){.yzpr .yzl+.yzl{clip-path:none}.yzpr .yzl+.yzl img{transform:none}.yzbig .yc,html[data-pal] .yzst .yzbig .yc{opacity:1}}
+@media (prefers-reduced-motion:reduce){.yzpr .yzl+.yzl{clip-path:none}.yzpr .yzl+.yzl img{transform:none}.yzbig .yc,html[data-pal] .yzst .yzbig .yc{opacity:1;transform:none;transition:none}}
 /* preview palette switcher */
 .palsw{position:fixed;right:14px;bottom:14px;z-index:90;display:flex;gap:6px;align-items:center;padding:8px 10px;background:rgba(20,20,20,.82);backdrop-filter:blur(8px);border-radius:40px;color:#fff;font:500 12px/1 var(--body);box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .palsw button{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:30px;white-space:nowrap}
@@ -2509,7 +2510,11 @@ function vpH(){var w=window.innerWidth,h=window.innerHeight;if(!SC.vh||w!==SC.vw
 function yzPrep(){
   app.querySelectorAll(".yzs").forEach(function(sec){
     sec._h=sec.offsetHeight;
-    if(sec.classList.contains("yzst")&&!sec._sp)sec._sp=[].slice.call(sec.querySelectorAll(".yc"));
+    if(sec.classList.contains("yzst")&&!sec._io){sec._io=1;
+      if(!("IntersectionObserver" in window))sec.classList.add("play");
+      else{if(!SC.stio)SC.stio=new IntersectionObserver(function(es){es.forEach(function(e){var el=e.target;if(!el.isConnected){SC.stio.unobserve(el);return;}
+        if(e.isIntersecting&&e.intersectionRatio>=.35)el.classList.add("play");else if(!e.isIntersecting)el.classList.remove("play");});},{threshold:[0,.35,.6]});
+        SC.stio.observe(sec);}}
     if(sec.classList.contains("yzab")&&!sec._im){sec._im=sec.querySelector(".yzimg");sec._img=sec.querySelector(".yzimg img");sec._tx=sec.querySelector(".yztx");}
     if(sec.classList.contains("yzpr")&&!sec._L){sec._L=[].slice.call(sec.querySelectorAll(".yzl"));sec._Li=sec._L.map(function(l){return l.querySelector("img");});sec._C=[].slice.call(sec.querySelectorAll(".yzc"));sec._D=[].slice.call(sec.querySelectorAll(".yzdots i"));}
   });
@@ -2521,9 +2526,7 @@ function yzTick(vh,secs,rects){
     var sec=secs[s],r=rects[s],dist=(sec._h||sec.offsetHeight)-vh;if(dist<=0)continue;
     if(r.bottom<-50||r.top>vh+50)continue;
     var p=Math.max(0,Math.min(1,-r.top/dist));
-    if(sec._sp){var n=sec._sp.length,f=Math.round(p*1.15*n*6)/6;
-      if(sec._f!==f||sec._lo!==lo){sec._f=f;sec._lo=lo;for(var i=0;i<n;i++){var v=Math.round((lo+(1-lo)*Math.max(0,Math.min(1,f-i)))*40)/40,e=sec._sp[i];if(e._o!==v){e._o=v;e.style.opacity=v;}}}}
-    else if(sec._im){
+    if(sec._im){
       if(wide){var q=Math.min(1,p*1.35),qs=q.toFixed(3);if(sec._q!==qs){sec._q=qs;sec._im.style.clipPath="inset(0 "+((1-q)*100).toFixed(2)+"% 0 0)";if(sec._img)sec._img.style.transform="scale("+(1.12-q*.12).toFixed(4)+")";if(sec._tx)sec._tx.style.opacity=(.25+q*.75).toFixed(3);}}
       else if(sec._q){sec._q=null;sec._im.style.clipPath="";if(sec._img)sec._img.style.transform="";if(sec._tx)sec._tx.style.opacity="";}}
     else if(sec._L){var L=sec._L,n2=L.length,seg=p*(n2-1);
@@ -2541,7 +2544,7 @@ function snapLayout(vh){
       var t0=el.getBoundingClientRect().top+sy;
       for(var c=0;c<el.children.length;c++){var sec=el.children[c],sr=sec.getBoundingClientRect(),st=sr.top+sy,sh=sr.height,dist=(sec._h||sh)-vh;
         if(sec.classList.contains("yzpr")&&dist>0){var n=sec.querySelectorAll(".yzl").length;for(var j=0;j<n;j++)add(st+(n>1?dist*j/(n-1):0),1,true,true);}
-        else if(sec.classList.contains("yzst")){add(st,sh,true);if(dist>0)add(st+dist/1.15,1,true);}
+        else if(sec.classList.contains("yzst"))add(st,sh,true);
         else if(sec.classList.contains("yzab")){add(st,sh,true);if(dist>0&&wide)add(st+dist/1.35,1,true);}}
       y=t0+h;continue;}
     if(k===0)add(0,y+h,true);else add(y,h,true);

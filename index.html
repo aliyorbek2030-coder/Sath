@@ -788,6 +788,11 @@ header.top.onhx{background:rgba(244,247,252,.72);backdrop-filter:blur(12px) satu
 .frt .fc .art img{transition:transform .8s ease}
 .frt .fc:hover .art img{transform:scale(1.05)}
 @keyframes frun{to{transform:translateX(calc(-50% - 9px))}}
+.intr .igrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.intr .igrid .fc{width:auto}
+.intr .fc h3{font-size:14.5px}
+@media (max-width:1000px){.intr .igrid{display:flex;overflow-x:auto;gap:12px;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none}.intr .igrid::-webkit-scrollbar{display:none}.intr .igrid .fc{width:30vw;flex:none;scroll-snap-align:start}}
+@media (max-width:760px){.intr .igrid .fc{width:62vw}}
 @media (max-width:1000px){.frt .fc{width:62vw}}
 @media (prefers-reduced-motion:reduce){.frt{animation:none}.frun{overflow-x:auto;-webkit-mask-image:none;mask-image:none}}
 /* === calmer hero: glass card === */
@@ -1191,6 +1196,25 @@ html:has(>body[style*="overflow: hidden"]){overflow:hidden}
 .palsw i{width:14px;height:14px;border-radius:50%;display:inline-block;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
 @media (max-width:760px){.palsw{bottom:66px;right:8px;left:auto;flex-wrap:nowrap;padding:4px;gap:2px}.palsw button{padding:7px}.palsw button span{display:none}.palsw i{width:18px;height:18px}}
 body:has(.menu) .palsw,body:has(.lb) .palsw{display:none!important}
+
+/* hero: the photo fills the first screen, SATH in white on top */
+.h8ph{background:#0B1A24}
+.h8ph::before{display:none}
+.h8ph .h8bg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;transform:scale(1.04);animation:h8zoom 26s ease-in-out infinite alternate}
+@keyframes h8zoom{to{transform:scale(1.12)}}
+.h8ph .h8sh{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(5,18,28,.6) 0%,rgba(5,18,28,.3) 36%,rgba(5,18,28,.4) 60%,rgba(5,18,28,.8) 100%)}
+.h8ph .h8in{z-index:1}
+.h8ph .h8big{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:#fff!important;-webkit-text-fill-color:#fff;animation:none;text-shadow:0 18px 60px rgba(0,0,0,.35)}
+.h8ph .h8mk{color:#fff;filter:drop-shadow(0 18px 30px rgba(0,0,0,.35))}
+.h8ph .h8pp span:first-child,html[data-pal] .h8ph .h8pp span:first-child{color:#fff}
+.h8ph .h8l,html[data-pal] .h8ph .h8l{color:rgba(255,255,255,.88)}
+.h8ph .hxa{color:rgba(255,255,255,.85)}
+.h8ph .hxa i{color:rgba(227,194,126,.8)}
+.h8ph .hxa b,html[data-pal] .h8ph .hxa b{color:#E3C27E}
+.h8ph .btn.hxo{background:rgba(255,255,255,.12)!important;color:#fff!important;box-shadow:inset 0 0 0 2px rgba(255,255,255,.85)!important}
+.h8ph .btn.hxo:hover{background:#fff!important;color:#0E1B30!important}
+.h8ph .hxdown{border-color:rgba(255,255,255,.6)}
+@media (prefers-reduced-motion:reduce){.h8ph .h8bg{animation:none}}
 </style>
 </head>
 <body>
@@ -1225,6 +1249,9 @@ var UI = {
   cta:{ru:"Обсудить проект",uz:"Loyihani muhokama qilish",en:"Discuss a project",zh:"洽谈项目"},
   see_projects:{ru:"Смотреть проекты",uz:"Loyihalarni ko‘rish",en:"View projects",zh:"查看项目"},
   all_projects:{ru:"Все проекты",uz:"Barcha loyihalar",en:"All projects",zh:"全部项目"},
+  int_h:{ru:"Интерьеры",uz:"Interyerlar",en:"Interiors",zh:"室内设计作品"},
+  int_p:{ru:"Квартиры, загородные дома, офисы и общественные пространства — от планировки до визуализации.",uz:"Kvartiralar, shahar tashqarisidagi uylar, ofislar va jamoat makonlari — rejalashdan vizualizatsiyagacha.",en:"Apartments, country houses, offices and public spaces — from layout to visualisation.",zh:"公寓、乡间别墅、办公室与公共空间——从平面布局到效果图。"},
+  int_all:{ru:"Все интерьеры",uz:"Barcha interyerlar",en:"All interiors",zh:"全部室内设计"},
   all_services:{ru:"Все услуги",uz:"Barcha xizmatlar",en:"All services",zh:"全部服务"},
   all_articles:{ru:"Все новости",uz:"Barcha yangiliklar",en:"All news",zh:"全部新闻"},
   more_about:{ru:"Подробнее о компании",uz:"Kompaniya haqida batafsil",en:"More about us",zh:"了解更多"},
@@ -1443,7 +1470,7 @@ var STATUS = {done:"st_done",build:"st_build",work:"st_work",design:"st_design",
 function stKey(p){return STATUS[p.status]?p.status:"design";}
 function stg(p,cls){var k=stKey(p);return '<span class="stg stg-'+k+(cls?' '+cls:'')+'">'+(k==="done"?'<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.3l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<i aria-hidden="true"></i>')+u(STATUS[k])+'</span>';}
 
-var SITE={phone:"+998 78 555 00 03",email:"",telegram:"https://t.me/pearlprojectsath",whatsapp:"",instagram:"https://www.instagram.com/pearlproject_sath.uz/",feat:["airport-mall","pushkin","blur-glass","samsarak"],hero:"",heroStyle:"letters",palette:"teal"};
+var SITE={phone:"+998 78 555 00 03",email:"",telegram:"https://t.me/pearlprojectsath",whatsapp:"",instagram:"https://www.instagram.com/pearlproject_sath.uz/",feat:["airport-mall","pushkin","crafers","samsarak"],hero:"crf01",heroBg:1,heroStyle:"letters",palette:"teal"};
 function telHref(){return "tel:"+String(SITE.phone||"").replace(/[^\d+]/g,"");}
 function tgHref(){var t=String(SITE.telegram||"").trim();if(!t)return "";if(/^https?:/.test(t))return t;return "https://t.me/"+t.replace(/^@/,"");}
 function waHref(){var t=String(SITE.whatsapp||"").trim();if(!t)return "";if(/^https?:/.test(t))return t;return "https://wa.me/"+t.replace(/\D/g,"");}
@@ -1650,31 +1677,31 @@ var P = [
   sub:{ru:"Концепция высотного района на 56 га · 8 вариантов",uz:"56 gektarlik baland binolar tumani konsepsiyasi · 8 variant",en:"Concept for a 56-hectare high-rise district · 8 options",zh:"56 公顷高层街区概念设计 · 8 个方案"},
   loc:{ru:"Ташкент",uz:"Toshkent",en:"Tashkent",zh:"塔什干"},
   d:{ru:"Концепция высотного района Crafer in Botanica на участке 56 гектаров в Ташкенте: в центре — башня-доминанта, вокруг — кварталы высотных зданий, зелёные бульвары и пешеходные улицы. Мы разработали 8 вариантов архитектурной идеи, здесь собраны ключевые визуализации.",uz:"Toshkentdagi 56 gektarlik uchastkada Crafer in Botanica baland binolar tumani konsepsiyasi: markazda — dominant minora, atrofida — baland binolar kvartallari, yashil bulvarlar va piyodalar ko‘chalari. Arxitektura g‘oyasining 8 ta variantini ishlab chiqdik, bu yerda asosiy vizualizatsiyalar jamlangan.",en:"Crafer in Botanica is a concept for a high-rise district on a 56-hectare site in Tashkent: a landmark tower at the centre, surrounded by blocks of tall buildings, green boulevards and pedestrian streets. We developed 8 options for the architectural idea; the key visuals are collected here.",zh:"Crafer in Botanica：位于塔什干、占地 56 公顷的高层街区概念设计。中心是一座地标塔楼，周围是高层建筑街区、绿色林荫大道和步行街。我们完成了 8 个建筑方案，这里汇集了主要效果图。"}},
- {s:"bochka-kids",type:"interior",img:"kdz-cover",status:"build",parent:"bochka",port:1,plan:"kdz-plan",planT:{ru:"План",uz:"Reja",en:"Plan",zh:"平面图"},gal:["kdz01","kdz02","kdz03","kdz04","kdz05","kdz06","kdz07","kdz08","kdz09","kdz10","kdz11","kdz12","kdz13","kdz14","kdz15","kdz16"],svc:["interior","visualization"],
+ {s:"bochka-kids",type:"interior",img:"kdz-cover",card:"kdz01",status:"build",parent:"bochka",port:1,plan:"kdz-plan",planT:{ru:"План",uz:"Reja",en:"Plan",zh:"平面图"},gal:["kdz01","kdz02","kdz03","kdz04","kdz05","kdz06","kdz07","kdz08","kdz09","kdz10","kdz11","kdz12","kdz13","kdz14","kdz15","kdz16"],svc:["interior","visualization"],
   facts:{area:{ru:"450 м²",uz:"450 m²",en:"450 m²",zh:"450 平方米"},style:{ru:"Сказочный интерьер в подводном стиле",uz:"Suv osti uslubidagi ertaknamo interyer",en:"Fairy-tale interior with an underwater theme",zh:"海底主题童话风格"}},
   t:{ru:"Детская игровая зона в ТРЦ «Бочка»",uz:"«Bochka» SKMdagi bolalar o‘yin zonasi",en:"Children’s play area at Bochka Mall",zh:"Bochka 购物中心儿童游乐区"},
   sub:{ru:"Сказочный подводный мир · 450 м²",uz:"Ertaknamo suv osti olami · 450 m²",en:"A fairy-tale underwater world · 450 m²",zh:"童话般的海底世界 · 450 平方米"},
   loc:{ru:"Туристическая зона, Ташкентская область",uz:"Turistik hudud, Toshkent viloyati",en:"Tourist area, Tashkent Region",zh:"塔什干州旅游区"},
   d:{ru:"Детская игровая зона площадью 450 м² в ТРЦ «Бочка» в сказочном подводном стиле. Под потолком плывут облака-светильники и медузы, на полу — ковёр с морскими узорами, в центре — карусель. Вокруг — замки и башни, сцена для фото, гримёрные, комната с костюмами и зона для праздников.",uz:"«Bochka» SKMdagi 450 m² maydonli bolalar o‘yin zonasi, ertaknamo suv osti uslubida. Shift ostida bulut-chiroqlar va meduzalar suzadi, polda dengiz naqshli gilam, markazda karusel. Atrofida qasr va minoralar, suratga tushish sahnasi, grim xonalari, liboslar xonasi va bayramlar uchun zona.",en:"A 450 m² children’s play area at Bochka Mall, designed as a fairy-tale underwater world. Cloud lights and jellyfish float under the ceiling, the carpet is patterned with sea life and a carousel stands at the centre. Around it are castles and towers, a photo stage, make-up stations, a costume room and a party area.",zh:"Bochka 购物中心内 450 平方米的儿童游乐区，以童话般的海底世界为主题。天花板下漂浮着云朵灯和水母，地毯上是海洋图案，中央是旋转木马。四周有城堡和塔楼、拍照舞台、化妆间、服装间和派对区。"}},
- {s:"pushkin-apartment",type:"interior",img:"pka-cover",status:"build",parent:"pushkin",port:1,gal:["pka01","pka02","pka03","pka04","pka05","pka06","pka07","pka08","pka09","pka10","pka11","pka12","pka13","pka14","pka15","pka16","pka17","pka18"],svc:["interior","visualization"],
+ {s:"pushkin-apartment",type:"interior",img:"pka-cover",card:"pka02",status:"build",parent:"pushkin",port:1,gal:["pka01","pka02","pka03","pka04","pka05","pka06","pka07","pka08","pka09","pka10","pka11","pka12","pka13","pka14","pka15","pka16","pka17","pka18"],svc:["interior","visualization"],
   facts:{area:{ru:"88 м²",uz:"88 m²",en:"88 m²",zh:"88 平方米"},style:{ru:"Современная классика",uz:"Zamonaviy klassika",en:"Modern classic",zh:"现代古典"}},
   t:{ru:"Квартира в ЖК Pushkin",uz:"Pushkin TJMdagi xonadon",en:"Apartment in Pushkin",zh:"Pushkin 住宅公寓"},
   sub:{ru:"Интерьер квартиры 88 м² · современная классика",uz:"88 m² xonadon interyeri · zamonaviy klassika",en:"88 m² apartment interior · modern classic",zh:"88 平方米公寓室内 · 现代古典"},
   loc:{ru:"Мирзо-Улугбекский район, Ташкент",uz:"Mirzo Ulug‘bek tumani, Toshkent",en:"Mirzo-Ulugbek district, Tashkent",zh:"塔什干米尔佐-乌鲁格别克区"},
   d:{ru:"Интерьер квартиры площадью 88 м² в жилом комплексе Pushkin в стиле современной классики. Прихожая отделана мрамором, зеркальными панелями и тёмным деревом, гостиная объединена со столовой, на кухне — мраморная барная стойка и встроенная техника. В спальне — лепнина и гардероб за стеклом, в детской — двухъярусная кровать и рабочее место, ванные отделаны камнем и деревом.",uz:"Pushkin turar-joy majmuasidagi 88 m² maydonli xonadon interyeri, zamonaviy klassika uslubida. Dahliz marmar, ko‘zgu panellar va to‘q rangli yog‘och bilan pardozlangan, mehmonxona ovqatlanish zonasi bilan birlashtirilgan, oshxonada marmar bar peshtaxtasi va o‘rnatilgan texnika. Yotoqxonada gipsli bezaklar va shisha garderob, bolalar xonasida ikki qavatli karavot va ish joyi, hammomlar tosh va yog‘och bilan pardozlangan.",en:"An 88 m² apartment in the Pushkin residential complex, designed in a modern classic style. The entrance hall is finished in marble, mirror panels and dark wood; the living room opens onto the dining area; the kitchen has a marble breakfast bar and built-in appliances. The bedroom has ceiling mouldings and a glass-fronted wardrobe, the children’s room a bunk bed and a desk, and the bathrooms are clad in stone and wood.",zh:"Pushkin 住宅区内一套 88 平方米的公寓，采用现代古典风格。门厅以大理石、镜面板和深色木材装饰；客厅与餐厅相连；厨房配有大理石吧台和嵌入式电器。卧室有石膏线脚和玻璃衣柜，儿童房设有双层床和书桌，浴室采用石材与木材饰面。"}},
- {s:"chimgan-dacha",type:"interior",img:"dch-cover",status:"build",port:1,plan:"dch-plan",planT:{ru:"Планы 1 и 2 этажей",uz:"1 va 2-qavat rejalari",en:"Ground and upper floor plans",zh:"一层和二层平面图"},gal:["dch01","dch02","dch03","dch04","dch05","dch06","dch07","dch08","dch09","dch10","dch11","dch12","dch13","dch14","dch15","dch16","dch17","dch18","dch19"],svc:["interior","visualization"],
+ {s:"chimgan-dacha",type:"interior",img:"dch-cover",card:"dch01",status:"build",port:1,plan:"dch-plan",planT:{ru:"Планы 1 и 2 этажей",uz:"1 va 2-qavat rejalari",en:"Ground and upper floor plans",zh:"一层和二层平面图"},gal:["dch01","dch02","dch03","dch04","dch05","dch06","dch07","dch08","dch09","dch10","dch11","dch12","dch13","dch14","dch15","dch16","dch17","dch18","dch19"],svc:["interior","visualization"],
   facts:{year:{ru:"Проект — 2025",uz:"Loyiha — 2025",en:"Designed in 2025",zh:"2025 年设计"},area:{ru:"440 м²",uz:"440 m²",en:"440 m²",zh:"440 平方米"},floors:{ru:"2 этажа",uz:"2 qavat",en:"2 floors",zh:"2 层"},style:{ru:"Современное шале",uz:"Zamonaviy shale",en:"Modern chalet",zh:"现代木屋风格"}},
   t:{ru:"Дача в Чимгане",uz:"Chimyondagi dacha",en:"Chalet in Chimgan",zh:"奇姆甘度假别墅"},
   sub:{ru:"Интерьер загородного дома 440 м² · современное шале",uz:"440 m² shahar tashqarisidagi uy interyeri · zamonaviy shale",en:"440 m² country house interior · modern chalet",zh:"440 平方米乡间别墅室内 · 现代木屋风格"},
   loc:{ru:"Чимган, Ташкентская область",uz:"Chimyon, Toshkent viloyati",en:"Chimgan, Tashkent Region",zh:"塔什干州奇姆甘"},
   d:{ru:"Интерьер двухэтажного загородного дома площадью 440 м² в горах Чимгана в стиле современного шале. Центр дома — холл со вторым светом и подвесным камином, вокруг — гостиные, столовая, кухня, спальни, детская и ванные комнаты. Стены и потолки отделаны светлым деревом, большие окна выходят на горы.",uz:"Chimyon tog‘laridagi 440 m² maydonli ikki qavatli shahar tashqarisidagi uy interyeri, zamonaviy shale uslubida. Uyning markazi — ikkinchi yorug‘likli va osma kaminli zal, atrofida mehmonxonalar, ovqatlanish xonasi, oshxona, yotoqxonalar, bolalar xonasi va hammomlar. Devor va shiftlar ochiq rangli yog‘och bilan pardozlangan, katta derazalar tog‘larga qaraydi.",en:"A 440 m² two-storey country house in the Chimgan mountains, designed as a modern chalet. At its heart is a double-height hall with a suspended fireplace, surrounded by living rooms, a dining room, kitchen, bedrooms, a children’s room and bathrooms. Walls and ceilings are clad in light timber, and large windows look out onto the mountains.",zh:"位于奇姆甘山区的一栋 440 平方米两层乡间别墅，采用现代木屋风格。核心是挑高大厅和悬挂式壁炉，四周是起居室、餐厅、厨房、卧室、儿童房和浴室。墙面和天花板采用浅色木材饰面，大窗面向群山。"}},
- {s:"btech-office",type:"interior",img:"qzo01",status:"done",parent:"service-company",port:1,wide:["qzo01","qzo02","qzo03","qzo11","qzo12","qzo13","qzo15","qzo16"],gal:["qzo01","qzo02","qzo03","qzo04","qzo05","qzo06","qzo07","qzo08","qzo09","qzo10","qzo11","qzo12","qzo13","qzo14","qzo15","qzo16"],svc:["interior","visualization"],
+ {s:"btech-office",type:"interior",img:"qzo01",card:"qzo04",status:"done",parent:"service-company",port:1,wide:["qzo01","qzo02","qzo03","qzo11","qzo12","qzo13","qzo15","qzo16"],gal:["qzo01","qzo02","qzo03","qzo04","qzo05","qzo06","qzo07","qzo08","qzo09","qzo10","qzo11","qzo12","qzo13","qzo14","qzo15","qzo16"],svc:["interior","visualization"],
   facts:{area:{ru:"1200 м²",uz:"1200 m²",en:"1,200 m²",zh:"1,200 平方米"},floors:{ru:"4 этажа",uz:"4 qavat",en:"4 floors",zh:"4 层"},style:{ru:"Нео-ар-деко с элементами современной классики",uz:"Zamonaviy klassika elementlari bilan neo-ar-deko",en:"Neo-Art Deco with contemporary classic touches",zh:"融合当代古典元素的新装饰艺术风格"}},
   t:{ru:"Btech офис",uz:"Btech ofisi",en:"Btech office",zh:"Btech 办公室"},
   sub:{ru:"Интерьер офисного здания · 4 этажа, 1200 м²",uz:"Ofis binosi interyeri · 4 qavat, 1200 m²",en:"Office building interior · 4 floors, 1,200 m²",zh:"办公楼室内 · 4 层，1,200 平方米"},
   loc:{ru:"Юнусабадский район, Ташкент",uz:"Yunusobod tumani, Toshkent",en:"Yunusabad district, Tashkent",zh:"塔什干尤努萨巴德区"},
   d:{ru:"Корректировка проекта офисного здания в Юнусабадском районе Ташкента: интерьеры четырёх этажей общей площадью 1200 м² в стиле нео-ар-деко с элементами современной классики. Ресепшн с мраморной стойкой, коридоры с деревянными панелями, переговорные с люстрами-ветвями, кабинеты руководителей, открытый офис, столовая, зона отдыха и клиентский зал с банкоматами.",uz:"Toshkentning Yunusobod tumanidagi ofis binosi loyihasiga tuzatishlar: umumiy maydoni 1200 m² bo‘lgan to‘rt qavat interyerlari, zamonaviy klassika elementlari bilan neo-ar-deko uslubida. Marmar peshtaxtali qabulxona, yog‘och panelli yo‘laklar, shox shaklidagi qandilli majlislar zallari, rahbarlar xonalari, ochiq ofis, oshxona, dam olish zonasi va bankomatli mijozlar zali.",en:"A revised design for an office building in Tashkent’s Yunusabad district: interiors for four floors totalling 1,200 m² in a neo-Art Deco style with contemporary classic touches. A reception with a marble desk, wood-panelled corridors, meeting rooms with branch-like chandeliers, executive offices, an open-plan office, a canteen, a lounge and a customer hall with ATMs.",zh:"塔什干尤努萨巴德区一栋办公楼的设计调整：四层共 1,200 平方米的室内设计，采用融合当代古典元素的新装饰艺术风格。包括大理石前台、木饰面走廊、配有枝形吊灯的会议室、管理层办公室、开放式办公区、员工餐厅、休息区以及设有自动取款机的客户大厅。"}},
- {s:"btech-showroom",type:"interior",img:"qzs-cover",status:"done",parent:"service-company",port:1,par:"2/3",lar:"4/3",gal:["qzs01","qzs02","qzs03","qzs04","qzs05","qzs06","qzs07","qzs08","qzs09","qzs10","qzs11","qzs12","qzs13"],svc:["interior","visualization"],
+ {s:"btech-showroom",type:"interior",img:"qzs-cover",card:"qzs01",status:"done",parent:"service-company",port:1,par:"2/3",lar:"4/3",gal:["qzs01","qzs02","qzs03","qzs04","qzs05","qzs06","qzs07","qzs08","qzs09","qzs10","qzs11","qzs12","qzs13"],svc:["interior","visualization"],
   facts:{area:{ru:"165 м²",uz:"165 m²",en:"165 m²",zh:"165 平方米"},style:{ru:"Нео-ар-деко с элементами современной классики",uz:"Zamonaviy klassika elementlari bilan neo-ar-deko",en:"Neo-Art Deco with contemporary classic touches",zh:"融合当代古典元素的新装饰艺术风格"}},
   t:{ru:"Btech шоурум",uz:"Btech shourumi",en:"Btech showroom",zh:"Btech 展厅"},
   sub:{ru:"Шоурум банковского оборудования · 165 м²",uz:"Bank uskunalari shourumi · 165 m²",en:"Banking equipment showroom · 165 m²",zh:"银行设备展厅 · 165 平方米"},
@@ -2127,8 +2154,11 @@ function heroImg(big){return SITE.hero?'img/'+SITE.hero+(big?'-1800.jpg':'-900.j
 function hxBtns(){return '<div class="hxc"><a class="btn acc" href="#projects">'+u("see_projects")+' '+ARW+'</a><a class="btn hxo" href="#contacts-form" data-track="cta_click">'+u("cta")+'</a></div>';}
 function hxSath(){return '<div class="hxa" aria-label="Structures, Architecture, Technology, Hub">'+ACR.map(function(a){return '<span><b>'+a[0]+'</b>'+a[1]+'</span>';}).join('<i>·</i>')+'</div>';}
 function heroLetters(){
-  return '<section class="h8" aria-label="SATH · Pearl Project"><div class="wrap h8in">'+
-   '<div class="h8lock">'+logoMark("h8mk")+'<h1 class="h8big" aria-label="SATH — Pearl Project" style="background-image:url(\''+heroImg(true)+'\')">SATH</h1></div>'+
+  var ph=!!(SITE.hero&&SITE.heroBg);
+  return '<section class="h8'+(ph?' h8ph':'')+'" aria-label="SATH · Pearl Project">'+
+   (ph?'<img class="h8bg" src="'+heroImg(true)+'" srcset="'+heroImg(false)+' 900w, '+heroImg(true)+' 1800w" sizes="100vw" alt="" fetchpriority="high"><i class="h8sh" aria-hidden="true"></i>':'')+
+   '<div class="wrap h8in">'+
+   '<div class="h8lock">'+logoMark("h8mk")+'<h1 class="h8big" aria-label="SATH — Pearl Project"'+(ph?'':' style="background-image:url(\''+heroImg(true)+'\')"')+'>SATH</h1></div>'+
    hxSath()+
    '<div class="h8pp"><span>Pearl</span> <span>Project</span></div>'+
    '<p class="h8l">'+u("pp_lead")+'</p>'+hxBtns()+
@@ -2197,6 +2227,10 @@ function vHome(){
   var feat=(SITE.feat||[]).map(prjBy).filter(Boolean);if(feat.length<4)feat=feat.concat(P.filter(function(x){return feat.indexOf(x)<0;}).slice(0,4-feat.length));
   tn("l");SH.push('<section class="sec wrap feat2" id="home-featured"><div class="fl"><span class="lbl">'+u("featured")+'</span><h2>'+u("nav_projects")+'</h2><p class="muted">'+u("featured_p")+'</p><a class="btn" href="#projects">'+u("all_projects")+' '+ARW+'</a></div>'+
     '<div class="frun" style="--n:'+P.length+'"><div class="frt">'+[0,1].map(function(copy){return P.map(function(p){return '<a class="fc" href="#project-'+p.s+'"'+(copy?' aria-hidden="true" tabindex="-1"':'')+'><div class="art">'+IMG(p.img,T(p.t),"(max-width:700px) 60vw, 22vw")+stg(p)+'</div><div class="fm"><div><h3>'+T(p.t)+'</h3><span>'+T(p.sub)+'</span></div>'+ARW+'</div></a>';}).join("");}).join("")+'</div></div></section>');
+  (function(){var L=P.filter(function(p){return p.type==="interior";});if(!L.length)return;
+    L.sort(function(a,b){return (a.status==="done"?0:1)-(b.status==="done"?0:1);});var sv=svcBy("interior");
+    tn("m");SH.push('<section class="sec wrap feat2 intr" id="home-interiors"><div class="fl"><span class="lbl">'+(sv?T(sv.t):u("int_h"))+'</span><h2>'+u("int_h")+'</h2><p class="muted">'+u("int_p")+'</p><a class="btn" href="#projects" data-act="ptype" data-type="interior">'+u("int_all")+' '+ARW+'</a></div>'+
+     '<div class="igrid">'+L.slice(0,5).map(function(p){return '<a class="fc" href="#project-'+p.s+'"><div class="art">'+IMG(p.card||p.img,T(p.t),"(max-width:760px) 62vw, (max-width:1100px) 26vw, 15vw")+stg(p)+'</div><div class="fm"><div><h3>'+T(p.t)+'</h3><span>'+T(p.sub)+'</span></div>'+ARW+'</div></a>';}).join("")+'</div></section>');})();
   if(0)SH.push('<section class="about2"><div class="ai">'+IMG("c1left",T((prjBy("bochka-new-mall")||P[0]).t),"(max-width:860px) 100vw, 50vw")+'</div><div class="at"><span class="lbl">'+u("about_lbl")+'</span><h2>'+u("about_h")+'</h2><div class="prose muted"><p>'+u("about_p1")+'</p><p>'+u("about_p2")+'</p></div>'+numsBlock()+'<a class="tlink" href="#about">'+u("more_about")+' '+ARW+'</a></div></section>');
   (function(){var d=doneBlock();if(d){tn("d");SH.push(d);}})();
   tn("p:cf19");SH.push('<section class="sec wrap"><div class="sechead"><div><span class="lbl">'+u("approach")+'</span><h2>'+u("approach_h")+'</h2></div></div><div class="approach">'+APPROACH.map(function(a){return '<div class="rv"><h4>'+T(a.h)+'</h4><p>'+T(a.p)+'</p></div>';}).join("")+'</div></section>');
@@ -2706,6 +2740,7 @@ document.addEventListener("click",function(e){
   else if(a==="hide-notice"){noticeHidden=true;try{localStorage.setItem("sath_notice","1");}catch(x){}var n=app.querySelector(".notice");if(n)n.remove();}
   else if(a==="gtab"){var sec=t.closest(".pvr");var g=t.dataset.g;sec.querySelectorAll(".gtabs button").forEach(function(b){b.setAttribute("aria-selected",String(b===t));});sec.querySelectorAll("[data-gp]").forEach(function(x){x.hidden=x.dataset.gp!==g;});}
   else if(a==="reset-flt"){flt={type:"",svc:"",status:"",year:"",q:""};render(true);}
+  else if(a==="ptype"){flt={type:t.dataset.type||"",svc:"",status:"",year:"",q:""};if(routeName==="projects")render(true);}
   else if(a==="form-reset"){formDraft[t.dataset.kind]={};render(true);}
   else if(a==="copy"){var txt=t.dataset.text,orig=t.textContent;
     function ok(){t.textContent=u("copied");setTimeout(function(){t.textContent=orig;},1600);}

@@ -2480,7 +2480,7 @@ function vService(s){
   var rel=P.filter(function(p){return p.svc.indexOf(s.s)>=0;}).slice(0,3);
   function list(o){return '<ul class="ilist">'+T(o).map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>';}
   return '<div class="view"><div class="wrap phead">'+crumbs([[u("nav_services"),"services"],[T(s.t)]])+
-   '<div style="display:flex;gap:20px;align-items:center">'+icon(s.ic,"ic")+'</div><h1 style="margin-top:18px;font-size:clamp(36px,6vw,84px)">'+T(s.t)+'</h1><p class="intro">'+T(s.d)+'</p><div style="margin-top:28px"><a class="btn acc" href="#service-cta-go">'+u("order")+' '+ARW+'</a></div></div>'+
+   '<h1 style="margin-top:18px;font-size:clamp(36px,6vw,84px)">'+T(s.t)+'</h1><p class="intro">'+T(s.d)+'</p><div style="margin-top:28px"><a class="btn acc" href="#service-cta-go">'+u("order")+' '+ARW+'</a></div></div>'+
    '<section class="wrap" style="padding-bottom:clamp(64px,8vw,112px)"><div class="chapter"><h3>'+u("s_who")+'</h3><p class="prose">'+T(s.who)+'</p></div>'+
    '<div class="chapter"><h3>'+u("s_inc")+'</h3>'+list(s.inc)+'</div>'+
    '<div class="chapter"><h3>'+u("s_out")+'</h3>'+list(s.out)+'</div></section>'+
